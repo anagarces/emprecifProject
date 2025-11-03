@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Suscripción | EmpreciF</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background: #F8FAFC;
+            margin: 0;
+            padding: 0;
+        }
+        .app-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+        .sidebar {
+            background: white;
+            padding: 2rem;
+            border-right: 1px solid #E2E8F0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background: var(--light);
+            color: var(--primary);
+        }
+        .main-content {
+            padding: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 2px solid #E2E8F0;">
+                <a href="index.html" style="display: block; margin-bottom: 2rem;">
+                    <img src="images/logo_emprecif_wordmark.png" alt="EmpreciF" style="height: 35px;">
+                </a>
+                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 900; margin-bottom: 1rem;">
+                    JG
+                </div>
+                <h3 style="font-weight: 800; margin-bottom: 0.25rem; font-size: 1.125rem;">Juan García</h3>
+                <p style="font-size: 0.875rem; color: var(--gray);">Plan Premium</p>
+            </div>
+            
+            <ul class="sidebar-nav">
+                <li><a href="dashboard.html">📊 Dashboard</a></li>
+                <li><a href="buscar.html">🔍 Buscar Empresas</a></li>
+                <li><a href="favoritos.html">⭐ Favoritos</a></li>
+                <li><a href="mi-cuenta.html">👤 Mi Cuenta</a></li>
+                <li><a href="suscripcion.html" class="active">💳 Suscripción</a></li>
+                <li><a href="#">📄 Informes</a></li>
+                <li><a href="#">🔔 Alertas</a></li>
+                <li><a href="#">⚙️ Configuración</a></li>
+            </ul>
+
+            <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #E2E8F0;">
+                <a href="index.html" style="color: var(--gray); text-decoration: none; font-size: 0.875rem; font-weight: 600; display: block; padding: 0.75rem; border-radius: 8px; transition: all 0.3s;"
+                   onmouseover="this.style.background='var(--light)'"
+                   onmouseout="this.style.background='transparent'">
+                    ← Volver a Inicio
+                </a>
+                <a href="index.html" style="color: var(--gray); text-decoration: none; font-size: 0.875rem; font-weight: 600; display: block; padding: 0.75rem; border-radius: 8px; transition: all 0.3s; margin-top: 0.5rem;"
+                   onmouseover="this.style.background='var(--light)'"
+                   onmouseout="this.style.background='transparent'">
+                    🚪 Cerrar Sesión
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div style="max-width: 1200px;">
+                <div style="margin-bottom: 3rem;">
+                    <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem;">
+                        Mi Suscripción
+                    </h1>
+                    <p style="font-size: 1.125rem; color: var(--gray);">
+                        Gestiona tu plan, facturación y método de pago
+                    </p>
+                </div>
+
+                <!-- Plan Actual -->
+                <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 3rem; border-radius: 20px; color: white; margin-bottom: 3rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <div style="display: inline-block; padding: 0.5rem 1rem; background: rgba(255, 255, 255, 0.2); border-radius: 50px; font-size: 0.875rem; font-weight: 800; margin-bottom: 1rem;">
+                                PLAN ACTIVO
+                            </div>
+                            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem;">
+                                Premium
+                            </h2>
+                            <p style="font-size: 1.125rem; opacity: 0.95; margin-bottom: 2rem;">
+                                Acceso completo a todas las funcionalidades
+                            </p>
+                            <div style="display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 1rem;">
+                                <span style="font-size: 4rem; font-weight: 900;">49€</span>
+                                <span style="font-size: 1.25rem; opacity: 0.9;">/mes</span>
+                            </div>
+                            <p style="font-size: 0.875rem; opacity: 0.9;">
+                                Próxima facturación: <strong>30 de Noviembre de 2025</strong>
+                            </p>
+                        </div>
+                        <div style="text-align: right;">
+                            <button style="padding: 1rem 2rem; background: white; color: var(--primary); border: none; border-radius: 12px; font-weight: 800; cursor: pointer; margin-bottom: 1rem; transition: all 0.3s;"
+                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.2)'"
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                                Cambiar Plan
+                            </button>
+                            <br>
+                            <button style="padding: 1rem 2rem; background: rgba(255, 255, 255, 0.2); color: white; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; transition: all 0.3s;"
+                                    onmouseover="this.style.background='rgba(255, 255, 255, 0.3)'"
+                                    onmouseout="this.style.background='rgba(255, 255, 255, 0.2)'">
+                                Cancelar Suscripción
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+                    <!-- Método de Pago -->
+                    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);">
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem;">Método de Pago</h3>
+                        
+                        <div style="background: var(--light); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <div style="width: 50px; height: 35px; background: linear-gradient(135deg, #1E3A8A, #3B82F6); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 0.75rem;">
+                                        VISA
+                                    </div>
+                                    <div>
+                                        <div style="font-weight: 700;">•••• •••• •••• 4532</div>
+                                        <div style="font-size: 0.875rem; color: var(--gray);">Expira 12/26</div>
+                                    </div>
+                                </div>
+                                <span style="padding: 0.5rem 1rem; background: var(--accent); color: white; border-radius: 50px; font-size: 0.75rem; font-weight: 800;">
+                                    PREDETERMINADA
+                                </span>
+                            </div>
+                        </div>
+
+                        <button style="width: 100%; padding: 1rem; background: var(--light); border: 2px solid #E2E8F0; border-radius: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s;"
+                                onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'"
+                                onmouseout="this.style.borderColor='#E2E8F0'; this.style.color='inherit'">
+                            + Añadir Método de Pago
+                        </button>
+                    </div>
+
+                    <!-- Resumen de Uso -->
+                    <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);">
+                        <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem;">Uso este Mes</h3>
+                        
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span style="font-size: 0.875rem; color: var(--gray);">Búsquedas</span>
+                                <span style="font-weight: 700;">247 / ∞</span>
+                            </div>
+                            <div style="background: #E2E8F0; height: 8px; border-radius: 50px; overflow: hidden;">
+                                <div style="background: linear-gradient(90deg, var(--primary), var(--secondary)); width: 24.7%; height: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span style="font-size: 0.875rem; color: var(--gray);">Informes PDF</span>
+                                <span style="font-weight: 700;">18 / ∞</span>
+                            </div>
+                            <div style="background: #E2E8F0; height: 8px; border-radius: 50px; overflow: hidden;">
+                                <div style="background: linear-gradient(90deg, var(--accent), var(--secondary)); width: 18%; height: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                <span style="font-size: 0.875rem; color: var(--gray);">Llamadas API</span>
+                                <span style="font-weight: 700;">342 / 1.000</span>
+                            </div>
+                            <div style="background: #E2E8F0; height: 8px; border-radius: 50px; overflow: hidden;">
+                                <div style="background: linear-gradient(90deg, var(--primary), var(--accent)); width: 34.2%; height: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historial de Facturas -->
+                <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);">
+                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem;">Historial de Facturas</h3>
+                    
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid #E2E8F0;">
+                                <th style="text-align: left; padding: 1rem; font-size: 0.875rem; color: var(--gray); font-weight: 700;">Fecha</th>
+                                <th style="text-align: left; padding: 1rem; font-size: 0.875rem; color: var(--gray); font-weight: 700;">Descripción</th>
+                                <th style="text-align: right; padding: 1rem; font-size: 0.875rem; color: var(--gray); font-weight: 700;">Importe</th>
+                                <th style="text-align: center; padding: 1rem; font-size: 0.875rem; color: var(--gray); font-weight: 700;">Estado</th>
+                                <th style="text-align: right; padding: 1rem; font-size: 0.875rem; color: var(--gray); font-weight: 700;">Factura</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #E2E8F0;">
+                                <td style="padding: 1rem; color: var(--gray);">30 Oct 2025</td>
+                                <td style="padding: 1rem; font-weight: 600;">Plan Premium - Octubre 2025</td>
+                                <td style="padding: 1rem; text-align: right; font-weight: 700;">49,00 €</td>
+                                <td style="padding: 1rem; text-align: center;">
+                                    <span style="padding: 0.5rem 1rem; background: #D1FAE5; color: #065F46; border-radius: 50px; font-size: 0.75rem; font-weight: 800;">PAGADO</span>
+                                </td>
+                                <td style="padding: 1rem; text-align: right;">
+                                    <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 700; font-size: 0.875rem;">Descargar PDF</a>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #E2E8F0;">
+                                <td style="padding: 1rem; color: var(--gray);">30 Sep 2025</td>
+                                <td style="padding: 1rem; font-weight: 600;">Plan Premium - Septiembre 2025</td>
+                                <td style="padding: 1rem; text-align: right; font-weight: 700;">49,00 €</td>
+                                <td style="padding: 1rem; text-align: center;">
+                                    <span style="padding: 0.5rem 1rem; background: #D1FAE5; color: #065F46; border-radius: 50px; font-size: 0.75rem; font-weight: 800;">PAGADO</span>
+                                </td>
+                                <td style="padding: 1rem; text-align: right;">
+                                    <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 700; font-size: 0.875rem;">Descargar PDF</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; color: var(--gray);">30 Ago 2025</td>
+                                <td style="padding: 1rem; font-weight: 600;">Plan Premium - Agosto 2025</td>
+                                <td style="padding: 1rem; text-align: right; font-weight: 700;">49,00 €</td>
+                                <td style="padding: 1rem; text-align: center;">
+                                    <span style="padding: 0.5rem 1rem; background: #D1FAE5; color: #065F46; border-radius: 50px; font-size: 0.75rem; font-weight: 800;">PAGADO</span>
+                                </td>
+                                <td style="padding: 1rem; text-align: right;">
+                                    <a href="#" style="color: var(--primary); text-decoration: none; font-weight: 700; font-size: 0.875rem;">Descargar PDF</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+

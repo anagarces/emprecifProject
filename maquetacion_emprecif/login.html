@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión | EmpreciF</title>
+    <meta name="description" content="Accede a tu cuenta de EmpreciF para consultar información empresarial, cuentas anuales y datos del BORME.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="ticker">
+            <div class="ticker-item">🔴 <strong>LIVE:</strong> 3.247.891 empresas activas</div>
+            <div class="ticker-item">📊 <strong>ACTUALIZADO:</strong> Hoy 08:00 AM</div>
+            <div class="ticker-item">🔥 <strong>+2.847</strong> actos BORME hoy</div>
+            <div class="ticker-item">💰 <strong>1.2M</strong> cuentas anuales disponibles</div>
+            <div class="ticker-item">⚡ <strong>847.392</strong> actos registrales</div>
+            <div class="ticker-item">✅ <strong>DATOS OFICIALES</strong> del Registro Mercantil</div>
+            <div class="ticker-item">🔴 <strong>LIVE:</strong> 3.247.891 empresas activas</div>
+            <div class="ticker-item">📊 <strong>ACTUALIZADO:</strong> Hoy 08:00 AM</div>
+            <div class="ticker-item">🔥 <strong>+2.847</strong> actos BORME hoy</div>
+            <div class="ticker-item">💰 <strong>1.2M</strong> cuentas anuales disponibles</div>
+            <div class="ticker-item">⚡ <strong>847.392</strong> actos registrales</div>
+            <div class="ticker-item">✅ <strong>DATOS OFICIALES</strong> del Registro Mercantil</div>
+        </div>
+    </div>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="images/logo_emprecif_wordmark.png" alt="EmpreciF - Información Empresarial">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="buscar.html">Buscar Empresas</a></li>
+                <li><a href="precios.html">Precios</a></li>
+                <li><a href="sobre-nosotros.html">Nosotros</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <div style="display: flex; gap: 1rem;">
+                <a href="login.html" class="btn btn-outline">Acceder</a>
+                <a href="registro.html" class="btn btn-primary">Prueba Gratis 14 Días</a>
+            </div>
+        </nav>
+    </header>
+
+    <section style="min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 4rem 2rem;">
+        <div style="max-width: 500px; width: 100%;">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 3rem; font-weight: 900; margin-bottom: 1rem;">
+                    Bienvenido de Nuevo
+                </h1>
+                <p style="font-size: 1.125rem; color: var(--gray);">
+                    Accede a tu cuenta para consultar información empresarial
+                </p>
+            </div>
+
+            <div style="background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
+                <form action="dashboard.html" method="post">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">Email</label>
+                        <input type="email" name="email" required 
+                               style="width: 100%; padding: 1rem; border: 2px solid #E2E8F0; border-radius: 12px; font-size: 1rem; transition: all 0.3s;"
+                               placeholder="tu@email.com"
+                               onfocus="this.style.borderColor='var(--primary)'"
+                               onblur="this.style.borderColor='#E2E8F0'">
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">Contraseña</label>
+                        <input type="password" name="password" required 
+                               style="width: 100%; padding: 1rem; border: 2px solid #E2E8F0; border-radius: 12px; font-size: 1rem; transition: all 0.3s;"
+                               placeholder="••••••••"
+                               onfocus="this.style.borderColor='var(--primary)'"
+                               onblur="this.style.borderColor='#E2E8F0'">
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" name="remember" style="width: 18px; height: 18px; cursor: pointer;">
+                            <span style="font-size: 0.875rem; color: var(--gray);">Recordarme</span>
+                        </label>
+                        <a href="#" style="font-size: 0.875rem; color: var(--primary); text-decoration: none; font-weight: 700;">¿Olvidaste tu contraseña?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large" style="width: 100%; margin-bottom: 1.5rem;">
+                        Iniciar Sesión
+                    </button>
+
+                    <div style="text-align: center; font-size: 0.875rem; color: var(--gray);">
+                        ¿No tienes cuenta? <a href="registro.html" style="color: var(--primary); text-decoration: none; font-weight: 700;">Regístrate gratis</a>
+                    </div>
+                </form>
+
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #E2E8F0;">
+                    <p style="text-align: center; font-size: 0.875rem; color: var(--gray); margin-bottom: 1rem;">O continúa con</p>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                        <button style="padding: 1rem; border: 2px solid #E2E8F0; border-radius: 12px; background: white; font-weight: 700; cursor: pointer; transition: all 0.3s;"
+                                onmouseover="this.style.borderColor='var(--primary)'"
+                                onmouseout="this.style.borderColor='#E2E8F0'">
+                            🔵 Google
+                        </button>
+                        <button style="padding: 1rem; border: 2px solid #E2E8F0; border-radius: 12px; background: white; font-weight: 700; cursor: pointer; transition: all 0.3s;"
+                                onmouseover="this.style.borderColor='var(--primary)'"
+                                onmouseout="this.style.borderColor='#E2E8F0'">
+                            🔷 LinkedIn
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="images/logo_emprecif_wordmark.png" alt="EmpreciF" style="height: 40px; margin-bottom: 1rem;">
+                <p>Plataforma líder de información empresarial en España. Datos oficiales del BORME actualizados diariamente. Más de 3.2 millones de empresas, 15 años de histórico.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Producto</h4>
+                <ul class="footer-links">
+                    <li><a href="buscar.html">Buscar Empresas</a></li>
+                    <li><a href="precios.html">Precios</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">Integraciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="#">Prensa</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Centro de Ayuda</a></li>
+                    <li><a href="#">Documentación</a></li>
+                    <li><a href="#">Guías</a></li>
+                    <li><a href="#">Estado del Sistema</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="aviso-legal.html">Aviso Legal</a></li>
+                    <li><a href="politica-privacidad.html">Privacidad</a></li>
+                    <li><a href="politica-cookies.html">Cookies</a></li>
+                    <li><a href="terminos-condiciones.html">Términos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2025 EmpreciF - APPYWEB SL (B02720803). Todos los derechos reservados.</div>
+            <div>Datos oficiales del BORME • Actualizado diariamente • Registro Mercantil de Alicante</div>
+        </div>
+    </footer>
+</body>
+</html>
+

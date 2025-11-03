@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta Gratis | Prueba Premium 14 Días | EmpreciF</title>
+    <meta name="description" content="Regístrate gratis en EmpreciF y prueba Premium durante 14 días sin tarjeta de crédito. Acceso completo a información empresarial del BORME.">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="ticker">
+            <div class="ticker-item">🔴 <strong>LIVE:</strong> 3.247.891 empresas activas</div>
+            <div class="ticker-item">📊 <strong>ACTUALIZADO:</strong> Hoy 08:00 AM</div>
+            <div class="ticker-item">🔥 <strong>+2.847</strong> actos BORME hoy</div>
+            <div class="ticker-item">💰 <strong>1.2M</strong> cuentas anuales disponibles</div>
+            <div class="ticker-item">⚡ <strong>847.392</strong> actos registrales</div>
+            <div class="ticker-item">✅ <strong>DATOS OFICIALES</strong> del Registro Mercantil</div>
+            <div class="ticker-item">🔴 <strong>LIVE:</strong> 3.247.891 empresas activas</div>
+            <div class="ticker-item">📊 <strong>ACTUALIZADO:</strong> Hoy 08:00 AM</div>
+            <div class="ticker-item">🔥 <strong>+2.847</strong> actos BORME hoy</div>
+            <div class="ticker-item">💰 <strong>1.2M</strong> cuentas anuales disponibles</div>
+            <div class="ticker-item">⚡ <strong>847.392</strong> actos registrales</div>
+            <div class="ticker-item">✅ <strong>DATOS OFICIALES</strong> del Registro Mercantil</div>
+        </div>
+    </div>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="images/logo_emprecif_wordmark.png" alt="EmpreciF - Información Empresarial">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="buscar.html">Buscar Empresas</a></li>
+                <li><a href="precios.html">Precios</a></li>
+                <li><a href="sobre-nosotros.html">Nosotros</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <div style="display: flex; gap: 1rem;">
+                <a href="login.html" class="btn btn-outline">Acceder</a>
+                <a href="registro.html" class="btn btn-primary">Prueba Gratis 14 Días</a>
+            </div>
+        </nav>
+    </header>
+
+    <section style="min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 4rem 2rem;">
+        <div style="max-width: 600px; width: 100%;">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <div style="display: inline-block; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--accent), var(--secondary)); color: white; border-radius: 50px; font-weight: 800; margin-bottom: 1.5rem;">
+                    🎉 14 DÍAS GRATIS • SIN TARJETA
+                </div>
+                <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 3rem; font-weight: 900; margin-bottom: 1rem;">
+                    Empieza Tu Prueba Gratis
+                </h1>
+                <p style="font-size: 1.125rem; color: var(--gray);">
+                    Acceso completo a Premium durante 14 días. Cancela cuando quieras.
+                </p>
+            </div>
+
+            <div style="background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
+                <form action="dashboard.html" method="post">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">Nombre Completo</label>
+                        <input type="text" name="name" required 
+                               style="width: 100%; padding: 1rem; border: 2px solid #E2E8F0; border-radius: 12px; font-size: 1rem; transition: all 0.3s;"
+                               placeholder="Juan García Martínez"
+                               onfocus="this.style.borderColor='var(--primary)'"
+                               onblur="this.style.borderColor='#E2E8F0'">
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">Email</label>
+                        <input type="email" name="email" required 
+                               style="width: 100%; padding: 1rem; border: 2px solid #E2E8F0; border-radius: 12px; font-size: 1rem; transition: all 0.3s;"
+                               placeholder="tu@email.com"
+                               onfocus="this.style.borderColor='var(--primary)'"
+                               onblur="this.style.borderColor='#E2E8F0'">
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">Contraseña</label>
+                        <input type="password" name="password" required 
+                               style="width: 100%; padding: 1rem; border: 2px solid #E2E8F0; border-radius: 12px; font-size: 1rem; transition: all 0.3s;"
+                               placeholder="Mínimo 8 caracteres"
+                               onfocus="this.style.borderColor='var(--primary)'"
+                               onblur="this.style.borderColor='#E2E8F0'">
+                        <p style="font-size: 0.75rem; color: var(--gray); margin-top: 0.5rem;">Usa al menos 8 caracteres con letras y números</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <label style="display: flex; align-items: start; gap: 0.75rem; cursor: pointer;">
+                            <input type="checkbox" name="terms" required style="width: 18px; height: 18px; cursor: pointer; margin-top: 0.25rem;">
+                            <span style="font-size: 0.875rem; color: var(--gray); line-height: 1.6;">
+                                Acepto los <a href="terminos-condiciones.html" style="color: var(--primary); text-decoration: none; font-weight: 700;">Términos y Condiciones</a> y la <a href="politica-privacidad.html" style="color: var(--primary); text-decoration: none; font-weight: 700;">Política de Privacidad</a>
+                            </span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large" style="width: 100%; margin-bottom: 1.5rem;">
+                        🚀 Empezar Prueba Gratis
+                    </button>
+
+                    <div style="text-align: center; font-size: 0.875rem; color: var(--gray);">
+                        ¿Ya tienes cuenta? <a href="login.html" style="color: var(--primary); text-decoration: none; font-weight: 700;">Inicia sesión</a>
+                    </div>
+                </form>
+
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #E2E8F0;">
+                    <p style="text-align: center; font-size: 0.875rem; color: var(--gray); margin-bottom: 1rem;">O regístrate con</p>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                        <button style="padding: 1rem; border: 2px solid #E2E8F0; border-radius: 12px; background: white; font-weight: 700; cursor: pointer; transition: all 0.3s;"
+                                onmouseover="this.style.borderColor='var(--primary)'"
+                                onmouseout="this.style.borderColor='#E2E8F0'">
+                            🔵 Google
+                        </button>
+                        <button style="padding: 1rem; border: 2px solid #E2E8F0; border-radius: 12px; background: white; font-weight: 700; cursor: pointer; transition: all 0.3s;"
+                                onmouseover="this.style.borderColor='var(--primary)'"
+                                onmouseout="this.style.borderColor='#E2E8F0'">
+                            🔷 LinkedIn
+                        </button>
+                    </div>
+                </div>
+
+                <div style="background: var(--light); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                    <p style="font-size: 0.875rem; color: var(--gray); text-align: center; margin: 0;">
+                        ✅ Sin tarjeta de crédito • ✅ Cancela cuando quieras • ✅ Acceso completo 14 días
+                    </p>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);">
+                <h3 style="font-size: 1.25rem; font-weight: 800; margin-bottom: 1rem; text-align: center;">¿Qué incluye la prueba Premium?</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray);">
+                        <span style="color: var(--accent); font-weight: 900; font-size: 1.25rem;">✓</span>
+                        Acceso a 1.2M cuentas anuales completas
+                    </li>
+                    <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray);">
+                        <span style="color: var(--accent); font-weight: 900; font-size: 1.25rem;">✓</span>
+                        Facturación, resultados y balances históricos
+                    </li>
+                    <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray);">
+                        <span style="color: var(--accent); font-weight: 900; font-size: 1.25rem;">✓</span>
+                        Ratios financieros y análisis de solvencia
+                    </li>
+                    <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray);">
+                        <span style="color: var(--accent); font-weight: 900; font-size: 1.25rem;">✓</span>
+                        Informes PDF ilimitados
+                    </li>
+                    <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray);">
+                        <span style="color: var(--accent); font-weight: 900; font-size: 1.25rem;">✓</span>
+                        Alertas automáticas del BORME
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="images/logo_emprecif_wordmark.png" alt="EmpreciF" style="height: 40px; margin-bottom: 1rem;">
+                <p>Plataforma líder de información empresarial en España. Datos oficiales del BORME actualizados diariamente. Más de 3.2 millones de empresas, 15 años de histórico.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Producto</h4>
+                <ul class="footer-links">
+                    <li><a href="buscar.html">Buscar Empresas</a></li>
+                    <li><a href="precios.html">Precios</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">Integraciones</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="#">Prensa</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Centro de Ayuda</a></li>
+                    <li><a href="#">Documentación</a></li>
+                    <li><a href="#">Guías</a></li>
+                    <li><a href="#">Estado del Sistema</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="aviso-legal.html">Aviso Legal</a></li>
+                    <li><a href="politica-privacidad.html">Privacidad</a></li>
+                    <li><a href="politica-cookies.html">Cookies</a></li>
+                    <li><a href="terminos-condiciones.html">Términos</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>&copy; 2025 EmpreciF - APPYWEB SL (B02720803). Todos los derechos reservados.</div>
+            <div>Datos oficiales del BORME • Actualizado diariamente • Registro Mercantil de Alicante</div>
+        </div>
+    </footer>
+</body>
+</html>
+

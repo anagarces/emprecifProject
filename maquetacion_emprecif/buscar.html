@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Buscar Empresas por NIF, CIF o Nombre | EmpreciF</title>
+    <meta name="description" content="Busca cualquier empresa española por NIF, CIF, razón social o administrador. Accede a datos oficiales del BORME en segundos.">
+    
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Top Bar with Live Ticker -->
+    <div class="top-bar">
+        <div class="ticker">
+            <div class="ticker-item">🔴 <strong>LIVE:</strong> 3.247.891 empresas activas</div>
+            <div class="ticker-item">📊 <strong>ACTUALIZADO:</strong> Hoy 08:00 AM</div>
+            <div class="ticker-item">🔥 <strong>+2.847</strong> actos BORME hoy</div>
+            <div class="ticker-item">💰 <strong>1.2M</strong> cuentas anuales disponibles</div>
+            <div class="ticker-item">⚡ <strong>847.392</strong> actos registrales</div>
+            <div class="ticker-item">✅ <strong>DATOS OFICIALES</strong> del Registro Mercantil</div>
+            <div class="ticker-item">🔴 <strong>LIVE:</strong> 3.247.891 empresas activas</div>
+            <div class="ticker-item">📊 <strong>ACTUALIZADO:</strong> Hoy 08:00 AM</div>
+            <div class="ticker-item">🔥 <strong>+2.847</strong> actos BORME hoy</div>
+            <div class="ticker-item">💰 <strong>1.2M</strong> cuentas anuales disponibles</div>
+            <div class="ticker-item">⚡ <strong>847.392</strong> actos registrales</div>
+            <div class="ticker-item">✅ <strong>DATOS OFICIALES</strong> del Registro Mercantil</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="images/logo_emprecif_wordmark.png" alt="EmpreciF - Información Empresarial">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="buscar.html">Buscar Empresas</a></li>
+                <li><a href="precios.html">Precios</a></li>
+                <li><a href="sobre-nosotros.html">Nosotros</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <div style="display: flex; gap: 1rem;">
+                <a href="login.html" class="btn btn-outline">Acceder</a>
+                <a href="registro.html" class="btn btn-primary">Prueba Gratis 14 Días</a>
+            </div>
+        </nav>
+    </header>
+
+    
+    <section>
+        <div class="section-header">
+            <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 4rem; font-weight: 900;">
+                Buscar Empresas Españolas
+            </h1>
+            <p style="font-size: 1.375rem; color: var(--gray); line-height: 1.7;">
+                Encuentra cualquier empresa registrada en España. Más de 3.2 millones de empresas en nuestra base de datos.
+            </p>
+        </div>
+        
+        <div style="max-width: 900px; margin: 0 auto; padding: 0 2rem;">
+            <form action="buscar.html" method="GET" class="search-box" style="margin-bottom: 4rem;">
+                <input 
+                    type="text" 
+                    name="q" 
+                    placeholder="Busca por nombre, NIF/CIF o administrador..." 
+                    value="TECNOLOGÍA"
+                    required
+                >
+                <button type="submit">🔍 Buscar</button>
+            </form>
+            
+            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem;">
+                Resultados de búsqueda: "TECNOLOGÍA"
+            </h2>
+            <p style="color: var(--gray); margin-bottom: 3rem;">Se encontraron <strong>3 empresas</strong></p>
+            
+            <div style="display: flex; flex-direction: column; gap: 2rem;">
+                <div style="background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06); border-left: 4px solid var(--primary);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.5rem;">
+                                <a href="empresa-publica.html" style="color: var(--primary); text-decoration: none;">TECNOLOGÍA AVANZADA SL</a>
+                            </h3>
+                            <p style="color: var(--gray);">NIF: A12345678 • Barcelona, Barcelona</p>
+                        </div>
+                        <span style="padding: 0.5rem 1.5rem; background: #D1FAE5; color: #065F46; border-radius: 50px; font-weight: 700; font-size: 0.875rem;">ACTIVA</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <p style="font-size: 0.875rem; color: var(--gray); margin-bottom: 0.25rem;">Facturación 2024</p>
+                            <p style="font-size: 1.5rem; font-weight: 900; color: var(--dark);">2.4M €</p>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.875rem; color: var(--gray); margin-bottom: 0.25rem;">Resultado Neto</p>
+                            <p style="font-size: 1.5rem; font-weight: 900; color: #065F46;">+347K €</p>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.875rem; color: var(--gray); margin-bottom: 0.25rem;">Empleados</p>
+                            <p style="font-size: 1.5rem; font-weight: 900; color: var(--dark);">24</p>
+                        </div>
+                    </div>
+                    <a href="empresa-publica.html" class="btn btn-primary" style="margin-top: 1.5rem;">Ver Perfil Completo →</a>
+                </div>
+                
+                <div style="background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="font-size: 1.75rem; font-weight: 800; margin-bottom: 0.5rem;">
+                                <a href="empresa-publica.html" style="color: var(--primary); text-decoration: none;">INNOVACIÓN TECNOLÓGICA SA</a>
+                            </h3>
+                            <p style="color: var(--gray);">NIF: A98765432 • Madrid, Madrid</p>
+                        </div>
+                        <span style="padding: 0.5rem 1.5rem; background: #D1FAE5; color: #065F46; border-radius: 50px; font-weight: 700; font-size: 0.875rem;">ACTIVA</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <p style="font-size: 0.875rem; color: var(--gray); margin-bottom: 0.25rem;">Facturación 2024</p>
+                            <p style="font-size: 1.5rem; font-weight: 900; color: var(--dark);">5.8M €</p>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.875rem; color: var(--gray); margin-bottom: 0.25rem;">Resultado Neto</p>
+                            <p style="font-size: 1.5rem; font-weight: 900; color: #065F46;">+892K €</p>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.875rem; color: var(--gray); margin-bottom: 0.25rem;">Empleados</p>
+                            <p style="font-size: 1.5rem; font-weight: 900; color: var(--dark);">47</p>
+                        </div>
+                    </div>
+                    <a href="empresa-publica.html" class="btn btn-primary" style="margin-top: 1.5rem;">Ver Perfil Completo →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="images/logo_emprecif_wordmark.png" alt="EmpreciF" style="height: 40px; margin-bottom: 1rem;">
+                <p>
+                    Plataforma líder de información empresarial en España. Datos oficiales del BORME actualizados diariamente. Más de 3.2 millones de empresas, 15 años de histórico.
+                </p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Producto</h4>
+                <ul class="footer-links">
+                    <li><a href="buscar.html">Buscar Empresas</a></li>
+                    <li><a href="precios.html">Precios</a></li>
+                    <li><a href="#">API</a></li>
+                    <li><a href="#">Integraciones</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Empresa</h4>
+                <ul class="footer-links">
+                    <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="#">Prensa</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Centro de Ayuda</a></li>
+                    <li><a href="#">Documentación</a></li>
+                    <li><a href="#">Guías</a></li>
+                    <li><a href="#">Estado del Sistema</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul class="footer-links">
+                    <li><a href="aviso-legal.html">Aviso Legal</a></li>
+                    <li><a href="politica-privacidad.html">Privacidad</a></li>
+                    <li><a href="politica-cookies.html">Cookies</a></li>
+                    <li><a href="terminos-condiciones.html">Términos</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div>
+                &copy; 2025 EmpreciF - APPYWEB SL (B02720803). Todos los derechos reservados.
+            </div>
+            <div>
+                Datos oficiales del BORME • Actualizado diariamente • Registro Mercantil de Alicante
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
