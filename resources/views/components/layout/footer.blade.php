@@ -63,9 +63,10 @@
             Datos oficiales del BORME • Actualizado diariamente • Registro Mercantil de Alicante
         </div>
     </div>
+
 </footer>
 
-<!-- Back to Top Button -->
+    <!-- Back to Top Button -->
 <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
     <i class="fas fa-arrow-up"></i>
 </button>
