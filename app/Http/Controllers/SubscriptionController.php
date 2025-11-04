@@ -20,9 +20,9 @@ class SubscriptionController extends Controller
     }
 
     /**
-     * Mostrar los planes disponibles
-     */
      * Mostrar la página de planes de suscripción
+     * 
+     * @return \Illuminate\View\View
      */
     public function plans()
     {
