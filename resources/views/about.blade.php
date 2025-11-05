@@ -70,64 +70,7 @@
     </div>
 </section>
 
-<footer style="background: #1a1a2e; color: white; padding: 4rem 2rem 2rem; margin-top: 4rem;">
-    <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-        <div class="footer-brand" style="grid-column: 1 / -1; max-width: 350px;">
-            <img src="{{ asset('images/logo_emprecif_wordmark_white.png') }}" alt="EmpreciF" style="height: 40px; margin-bottom: 1.5rem;">
-            <p style="color: #a0a0b8; line-height: 1.7; margin-bottom: 1.5rem;">Plataforma líder de información empresarial en España. Datos oficiales del BORME actualizados diariamente. Más de 3.2 millones de empresas, 15 años de histórico.</p>
-            <div style="display: flex; gap: 1rem;">
-                <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
-                <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
-                <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
-            </div>
-        </div>
-        
-        <div class="footer-section">
-            <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1.5rem; color: white;">Producto</h4>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('search') }}" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Buscar Empresas</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('pricing') }}" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Precios</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">API</a></li>
-                <li><a href="#" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Integraciones</a></li>
-            </ul>
-        </div>
-        
-        <div class="footer-section">
-            <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1.5rem; color: white;">Empresa</h4>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('about') }}" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Sobre Nosotros</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('blog.index') }}" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Blog</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('contact') }}" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Contacto</a></li>
-                <li><a href="#" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Prensa</a></li>
-            </ul>
-        </div>
-        
-        <div class="footer-section">
-            <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1.5rem; color: white;">Recursos</h4>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Centro de Ayuda</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Documentación</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Guías</a></li>
-                <li><a href="#" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Estado del Sistema</a></li>
-            </ul>
-        </div>
-        
-        <div class="footer-section">
-            <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1.5rem; color: white;">Legal</h4>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('legal.notice') }}" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Aviso Legal</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('legal.privacy') }}" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Política de Privacidad</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('legal.cookies') }}" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Política de Cookies</a></li>
-                <li><a href="{{ route('legal.terms') }}" style="color: #a0a0b8; text-decoration: none; transition: color 0.3s ease;">Términos y Condiciones</a></li>
-            </ul>
-        </div>
-    </div>
-    
-    <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; text-align: center; color: #a0a0b8; font-size: 0.875rem;">
-        <p>&copy; {{ date('Y') }} EmpreciF - APPYWEB SL (B02720803). Todos los derechos reservados.</p>
-        <p style="margin-top: 0.5rem;">Datos oficiales del BORME • Actualizado diariamente • Registro Mercantil de Alicante</p>
-    </div>
-</footer>
+
 
 @push('scripts')
 <script>
@@ -164,57 +107,4 @@
 </script>
 @endpush
 
-        <div class="max-w-6xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
-                <h2 class="text-4xl font-display font-bold mb-6">Nuestra Misión</h2>
-                <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
-                    Ser la plataforma líder en España, ofreciendo la información más precisa, actualizada y completa del Boletín Oficial del Registro Mercantil (BORME) y el Registro Mercantil. Nuestro compromiso es transformar datos complejos en inteligencia de negocio accesible para todos.
-                </p>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
-                <h2 class="text-4xl font-display font-bold mb-8">Nuestros Valores</h2>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-3 text-primary-600">🎯 Transparencia</h3>
-                        <p class="text-gray-700">Todos nuestros datos son verificados y provienen de fuentes oficiales del BORME y Registro Mercantil.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-3 text-secondary-600">⚡ Precisión</h3>
-                        <p class="text-gray-700">Actualización diaria automática para asegurar la máxima fiabilidad y vigencia de los datos.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-3 text-accent-600">💡 Innovación</h3>
-                        <p class="text-gray-700">Interfaz moderna, búsqueda avanzada y herramientas de análisis que simplifican la due diligence.</p>
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold mb-3 text-primary-600">🤝 Compromiso</h3>
-                        <p class="text-gray-700">Soporte dedicado y atención al cliente profesional para resolver cualquier duda o necesidad.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 mb-12">
-                <h2 class="text-4xl font-display font-bold mb-6">El Equipo Detrás de EmpreciF</h2>
-                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
-                    EmpreciF es un proyecto de <strong>APPYWEB SL</strong>, una empresa tecnológica con sede en Alcoy (Alicante), especializada en el desarrollo de plataformas de datos y software B2B. Contamos con un equipo de ingenieros de datos, desarrolladores y expertos en análisis financiero comprometidos con ofrecer la mejor experiencia de usuario.
-                </p>
-                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-accent-500">
-                    <p class="font-semibold text-gray-900 mb-1">APPYWEB SL</p>
-                    <p class="text-gray-700">CIF: B02720803</p>
-                    <p class="text-gray-700">Calle Mestre Laporta, Nº 2, 1º piso, puerta 2</p>
-                    <p class="text-gray-700">03801 Alcoy (Alicante), España</p>
-                    <p class="text-gray-700 mt-3">📧 <a href="mailto:info@appyweb.es" class="hover:text-primary-600 transition-colors">info@appyweb.es</a></p>
-                    <p class="text-gray-700">📞 <a href="tel:+34658170809" class="hover:text-primary-600 transition-colors">+34 658 17 08 09</a></p>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <a href="{{ route('contact') }}" class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors duration-200">
-                    Contacta con el Equipo
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 @endsection

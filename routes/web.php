@@ -34,9 +34,14 @@ Route::post('/contacto', [PageController::class, 'contactSubmit'])->name('contac
 
 // Blog - Rutas públicas
 use App\Http\Controllers\BlogPostController;
+use App\Models\BlogPost;
 
 Route::get('/blog', [BlogPostController::class, 'index'])->name('blog.index');
-Route::get('/blog/{post:slug}', [BlogPostController::class, 'show'])->name('blog.show');
+
+// Ruta para mostrar un post del blog
+Route::get('/blog/{post}', function (BlogPost $post) {
+    return app(BlogPostController::class)->show($post);
+})->name('blog.show');
 
 // Panel de administración - Blog
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
@@ -61,13 +66,6 @@ Route::prefix('legal')->name('legal.')->group(function () {
 
 // Área de autenticación
 require __DIR__.'/auth.php';
-
-// Rutas de autenticación social
-Route::get('/auth/{provider}/redirect', [\App\Http\Controllers\Auth\SocialiteController::class, 'redirectToProvider'])
-    ->name('auth.socialite.redirect');
-
-Route::get('/auth/{provider}/callback', [\App\Http\Controllers\Auth\SocialiteController::class, 'handleProviderCallback'])
-    ->name('auth.socialite.callback');
 
 // Rutas protegidas por autenticación
 Route::middleware(['auth', 'verified'])->group(function () {

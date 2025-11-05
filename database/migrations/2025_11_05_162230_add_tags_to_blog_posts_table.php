@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('trial_ends_at')->nullable()->after('email_verified_at');
+        Schema::table('blog_posts', function (Blueprint $table) {
+            $table->json('tags')->nullable()->after('category');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('trial_ends_at');
+        Schema::table('blog_posts', function (Blueprint $table) {
+            $table->dropColumn('tags');
         });
     }
 };

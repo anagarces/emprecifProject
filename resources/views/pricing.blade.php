@@ -161,52 +161,5 @@
     </div>
 </section>
 
-<footer>
-    <div class="footer-content">
-        <div class="footer-brand">
-            <img src="{{ asset('images/logo_emprecif_wordmark.png') }}" alt="EmpreciF" style="height: 40px; margin-bottom: 1rem;">
-            <p>Plataforma líder de información empresarial en España. Datos oficiales del BORME actualizados diariamente. Más de 3.2 millones de empresas, 15 años de histórico.</p>
-        </div>
-        <div class="footer-section">
-            <h4>Producto</h4>
-            <ul class="footer-links">
-                <li><a href="{{ route('search') }}">Buscar Empresas</a></li>
-                <li><a href="{{ route('pricing') }}">Precios</a></li>
-                <li><a href="#">API</a></li>
-                <li><a href="#">Integraciones</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h4>Empresa</h4>
-            <ul class="footer-links">
-                <li><a href="{{ route('about') }}">Sobre Nosotros</a></li>
-                <li><a href="{{ route('blog.index') }}">Blog</a></li>
-                <li><a href="{{ route('contact') }}">Contacto</a></li>
-                <li><a href="#">Prensa</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h4>Recursos</h4>
-            <ul class="footer-links">
-                <li><a href="#">Centro de Ayuda</a></li>
-                <li><a href="#">Documentación</a></li>
-                <li><a href="#">Guías</a></li>
-                <li><a href="#">Estado del Sistema</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h4>Legal</h4>
-            <ul class="footer-links">
-                <li><a href="{{ route('legal.notice') }}">Aviso Legal</a></li>
-                <li><a href="{{ route('legal.privacy') }}">Privacidad</a></li>
-                <li><a href="{{ route('legal.cookies') }}">Cookies</a></li>
-                <li><a href="{{ route('legal.terms') }}">Términos</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <div>&copy; {{ date('Y') }} EmpreciF - APPYWEB SL (B02720803). Todos los derechos reservados.</div>
-        <div>Datos oficiales del BORME • Actualizado diariamente • Registro Mercantil de Alicante</div>
-    </div>
-</footer>
+
 @endsection

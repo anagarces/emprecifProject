@@ -44,8 +44,8 @@ class RegisteredUserController extends Controller
             'trial_ends_at' => now()->addDays(15), // 15 días de prueba
         ]);
 
-        // Asignar el rol de usuario por defecto
-        $user->assignRole('usuario');
+        // Assign default user role
+        $user->assignRole('user');
 
         event(new Registered($user));
         Auth::login($user);

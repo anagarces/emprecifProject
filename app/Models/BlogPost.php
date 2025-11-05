@@ -16,13 +16,17 @@ class BlogPost extends Model
         'excerpt',
         'content',
         'category',
+        'tags',
         'published',
         'published_at',
+        'meta_title',
+        'meta_description',
     ];
 
     protected $casts = [
         'published' => 'boolean',
         'published_at' => 'datetime',
+        'tags' => 'array',
     ];
 
     protected static function boot()
@@ -30,14 +34,29 @@ class BlogPost extends Model
         parent::boot();
 
         static::creating(function ($post) {
-            $post->slug = Str::slug($post->title);
+            if (empty($post->slug)) {
+                $post->slug = Str::slug($post->title);
+            } else {
+                $post->slug = Str::slug($post->slug);
+            }
             
             if ($post->published && empty($post->published_at)) {
                 $post->published_at = now();
             }
         });
+
+        static::updating(function ($post) {
+            if ($post->isDirty('title') && empty($post->slug)) {
+                $post->slug = Str::slug($post->title);
+            }
+        });
     }
 
+    /**
+     * Get the route key name for Laravel's route model binding.
+     *
+     * @return string
+     */
     public function getRouteKeyName()
     {
         return 'slug';

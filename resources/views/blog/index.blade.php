@@ -134,44 +134,6 @@
 </script>
 @endpush
 
-<footer style="background-color: #1a202c; color: white; padding: 4rem 2rem 2rem;">
-    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-        <div class="footer-brand">
-            <img src="{{ asset('images/logo_emprecif_wordmark_white.png') }}" alt="EmpreciF" style="height: 40px; margin-bottom: 1rem;">
-            <p style="color: #a0aec0; line-height: 1.6;">Plataforma líder de información empresarial en España. Datos oficiales del BORME actualizados diariamente. Más de 3.2 millones de empresas, 15 años de histórico.</p>
-        </div>
-        <div>
-            <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; font-weight: 700; margin-bottom: 1.5rem; color: white;">Producto</h4>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('search') }}" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">Buscar Empresas</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('pricing') }}" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">Precios</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">API</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">Integraciones</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; font-weight: 700; margin-bottom: 1.5rem; color: white;">Empresa</h4>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('about') }}" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">Sobre Nosotros</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('blog.index') }}" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">Blog</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="{{ route('contact') }}" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">Contacto</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">Prensa</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.125rem; font-weight: 700; margin-bottom: 1.5rem; color: white;">Recursos</h4>
-            <ul style="list-style: none; padding: 0; margin: 0;">
-                <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">Centro de Ayuda</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">Documentación</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">Guías</a></li>
-                <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #a0aec0; text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#4299e1'" onmouseout="this.style.color='#a0aec0'">Estado del Sistema</a></li>
-            </ul>
-        </div>
-    </div>
-    <div style="max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid #2d3748; text-align: center; color: #a0aec0; font-size: 0.875rem; line-height: 1.5;">
-        <div>© {{ date('Y') }} EmpreciF - APPYWEB SL (B02720803). Todos los derechos reservados.</div>
-        <div>Datos oficiales del BORME • Actualizado diariamente • Registro Mercantil de Alicante</div>
-    </div>
-</footer>
+
 
 @endsection
