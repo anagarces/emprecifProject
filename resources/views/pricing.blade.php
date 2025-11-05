@@ -1,0 +1,212 @@
+@extends('layouts.app')
+
+@section('title', 'Precios y Planes | EmpreciF')
+
+@section('description', 'Planes Free y Premium. Desde 0€/mes. Prueba gratis 14 días sin tarjeta.')
+
+@section('content')
+<section>
+    <div class="section-header">
+        <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 4rem; font-weight: 900;">
+            Planes y Precios Transparentes
+        </h1>
+        <p style="font-size: 1.375rem; color: var(--gray); line-height: 1.7;">
+            Elige el plan que mejor se adapte a tus necesidades. Prueba Premium gratis durante 14 días, sin tarjeta de crédito.
+        </p>
+    </div>
+
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; margin-bottom: 5rem;">
+            <!-- Plan Free -->
+            <div style="background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06); border: 2px solid #E2E8F0;">
+                <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">Plan Free</h3>
+                <div style="margin-bottom: 2rem;">
+                    <span style="font-size: 4rem; font-weight: 900; color: var(--dark);">0€</span>
+                    <span style="font-size: 1.25rem; color: var(--gray);">/mes</span>
+                </div>
+                <p style="font-size: 1.125rem; color: var(--gray); margin-bottom: 2rem;">
+                    Perfecto para consultas ocasionales y verificación básica de empresas.
+                </p>
+                <a href="{{ route('register') }}" class="btn btn-outline btn-large" style="width: 100%; text-align: center; display: block; margin-bottom: 2rem;">Empezar Gratis</a>
+                
+                <div style="border-top: 2px solid #E2E8F0; padding-top: 2rem;">
+                    <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1.5rem;">Incluye:</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray);">
+                                <span style="color: var(--accent); font-weight: 900; font-size: 1.25rem;">✓</span>
+                                Búsqueda ilimitada de empresas
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray);">
+                                <span style="color: var(--accent); font-weight: 900; font-size: 1.25rem;">✓</span>
+                                Datos mercantiles básicos (NIF, domicilio, capital)
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray);">
+                                <span style="color: var(--accent); font-weight: 900; font-size: 1.25rem;">✓</span>
+                                Administradores actuales
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray);">
+                                <span style="color: var(--accent); font-weight: 900; font-size: 1.25rem;">✓</span>
+                                Últimos actos del BORME
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray); opacity: 0.5;">
+                                <span style="color: #CBD5E1; font-weight: 900; font-size: 1.25rem;">✗</span>
+                                Cuentas anuales y datos financieros
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray); opacity: 0.5;">
+                                <span style="color: #CBD5E1; font-weight: 900; font-size: 1.25rem;">✗</span>
+                                Informes PDF descargables
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray); opacity: 0.5;">
+                                <span style="color: #CBD5E1; font-weight: 900; font-size: 1.25rem;">✗</span>
+                                Alertas automáticas del BORME
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: var(--gray); opacity: 0.5;">
+                                <span style="color: #CBD5E1; font-weight: 900; font-size: 1.25rem;">✗</span>
+                                Acceso a API
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Plan Premium -->
+                <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 3rem; border-radius: 20px; box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3); border: 3px solid var(--primary); position: relative;">
+                    <div style="position: absolute; top: -15px; right: 30px; background: var(--accent); color: white; padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 800; font-size: 0.875rem;">
+                        🔥 MÁS POPULAR
+                    </div>
+                    <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 1rem; color: white;">Plan Premium</h3>
+                    <div style="margin-bottom: 2rem;">
+                        <span style="font-size: 4rem; font-weight: 900; color: white;">49€</span>
+                        <span style="font-size: 1.25rem; color: rgba(255, 255, 255, 0.9);">/mes</span>
+                    </div>
+                    <p style="font-size: 1.125rem; color: rgba(255, 255, 255, 0.95); margin-bottom: 2rem;">
+                        Acceso completo a todos los datos financieros y herramientas profesionales.
+                    </p>
+                    <a href="{{ route('register', ['plan' => 'premium']) }}" class="btn btn-large" style="width: 100%; text-align: center; display: block; margin-bottom: 2rem; background: white; color: var(--primary);">🚀 Probar Gratis 14 Días</a>
+                    
+                    <div style="border-top: 2px solid rgba(255, 255, 255, 0.2); padding-top: 2rem;">
+                        <h4 style="font-size: 1.125rem; font-weight: 700; margin-bottom: 1.5rem; color: white;">Todo lo del Plan Free, más:</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: white;">
+                                <span style="color: white; font-weight: 900; font-size: 1.25rem;">✓</span>
+                                <strong>Cuentas anuales completas (15 años de histórico)</strong>
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: white;">
+                                <span style="color: white; font-weight: 900; font-size: 1.25rem;">✓</span>
+                                <strong>Facturación, resultados y balances</strong>
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: white;">
+                                <span style="color: white; font-weight: 900; font-size: 1.25rem;">✓</span>
+                                <strong>Ratios financieros y análisis de solvencia</strong>
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: white;">
+                                <span style="color: white; font-weight: 900; font-size: 1.25rem;">✓</span>
+                                Informes PDF profesionales ilimitados
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: white;">
+                                <span style="color: white; font-weight: 900; font-size: 1.25rem;">✓</span>
+                                Alertas automáticas del BORME por email
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: white;">
+                                <span style="color: white; font-weight: 900; font-size: 1.25rem;">✓</span>
+                                Monitorización de hasta 50 empresas
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: white;">
+                                <span style="color: white; font-weight: 900; font-size: 1.25rem;">✓</span>
+                                Acceso a API (1.000 consultas/mes)
+                            </li>
+                            <li style="padding: 0.75rem 0; display: flex; align-items: center; gap: 0.75rem; color: white;">
+                                <span style="color: white; font-weight: 900; font-size: 1.25rem;">✓</span>
+                                Soporte prioritario 24/7
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div style="background: white; padding: 4rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);">
+                <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 800; margin-bottom: 3rem; text-align: center;">Preguntas Frecuentes</h2>
+                
+                <div style="display: flex; flex-direction: column; gap: 2rem;">
+                    <div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--primary);">¿Puedo cancelar en cualquier momento?</h3>
+                        <p style="font-size: 1.125rem; color: var(--gray); line-height: 1.8;">
+                            Sí, puedes cancelar tu suscripción en cualquier momento desde tu panel de usuario. No hay permanencia ni penalizaciones.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--primary);">¿Necesito tarjeta de crédito para la prueba gratis?</h3>
+                        <p style="font-size: 1.125rem; color: var(--gray); line-height: 1.8;">
+                            No, puedes probar el Plan Premium durante 14 días sin introducir ninguna tarjeta de crédito. Solo necesitas registrarte con tu email.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--primary);">¿Los datos son oficiales?</h3>
+                        <p style="font-size: 1.125rem; color: var(--gray); line-height: 1.8;">
+                            Sí, todos los datos provienen directamente del BORME (Boletín Oficial del Registro Mercantil) y se actualizan diariamente de forma automática.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--primary);">¿Puedo cambiar de plan?</h3>
+                        <p style="font-size: 1.125rem; color: var(--gray); line-height: 1.8;">
+                            Sí, puedes cambiar de Free a Premium o viceversa en cualquier momento. El cambio es inmediato.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-brand">
+            <img src="{{ asset('images/logo_emprecif_wordmark.png') }}" alt="EmpreciF" style="height: 40px; margin-bottom: 1rem;">
+            <p>Plataforma líder de información empresarial en España. Datos oficiales del BORME actualizados diariamente. Más de 3.2 millones de empresas, 15 años de histórico.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Producto</h4>
+            <ul class="footer-links">
+                <li><a href="{{ route('search') }}">Buscar Empresas</a></li>
+                <li><a href="{{ route('pricing') }}">Precios</a></li>
+                <li><a href="#">API</a></li>
+                <li><a href="#">Integraciones</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Empresa</h4>
+            <ul class="footer-links">
+                <li><a href="{{ route('about') }}">Sobre Nosotros</a></li>
+                <li><a href="{{ route('blog.index') }}">Blog</a></li>
+                <li><a href="{{ route('contact') }}">Contacto</a></li>
+                <li><a href="#">Prensa</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Recursos</h4>
+            <ul class="footer-links">
+                <li><a href="#">Centro de Ayuda</a></li>
+                <li><a href="#">Documentación</a></li>
+                <li><a href="#">Guías</a></li>
+                <li><a href="#">Estado del Sistema</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <ul class="footer-links">
+                <li><a href="{{ route('legal.notice') }}">Aviso Legal</a></li>
+                <li><a href="{{ route('legal.privacy') }}">Privacidad</a></li>
+                <li><a href="{{ route('legal.cookies') }}">Cookies</a></li>
+                <li><a href="{{ route('legal.terms') }}">Términos</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div>&copy; {{ date('Y') }} EmpreciF - APPYWEB SL (B02720803). Todos los derechos reservados.</div>
+        <div>Datos oficiales del BORME • Actualizado diariamente • Registro Mercantil de Alicante</div>
+    </div>
+</footer>
+@endsection

@@ -540,7 +540,7 @@
         }
 
         /* Back to Top Button */
-.back-to-top {
+    .back-to-top {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
@@ -573,7 +573,9 @@
     transform: translateY(-4px);
     box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
 }
-        
+     
+
+    
         /* Responsive */
         @media (max-width: 1200px) {
             .hero {

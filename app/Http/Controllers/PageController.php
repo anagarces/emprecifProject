@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\BlogPostController;
+use App\Models\BlogPost;
 
 class PageController extends Controller
 {
@@ -19,8 +22,8 @@ class PageController extends Controller
      */
     public function search(Request $request)
     {
-        $query = $request->get('q');
-        return view('search', compact('query'));
+        $searchController = new \App\Http\Controllers\SearchController();
+        return $searchController->index($request);
     }
 
     /**
@@ -49,10 +52,11 @@ class PageController extends Controller
             'email' => 'required|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
-            'g-recaptcha-response' => 'required|captcha',
         ]);
 
         // Aquí iría la lógica para enviar el correo
+        // Por ejemplo:
+        // Mail::to('contacto@emprecif.com')->send(new ContactFormMail($validated));
         
         return redirect()->route('contact')
             ->with('status', '¡Gracias por contactarnos! Te responderemos lo antes posible.');
@@ -64,22 +68,6 @@ class PageController extends Controller
     public function about()
     {
         return view('about');
-    }
-
-    /**
-     * Muestra la página del blog
-     */
-    public function blog()
-    {
-        return view('blog.index');
-    }
-
-    /**
-     * Muestra un artículo del blog
-     */
-    public function blogShow($slug)
-    {
-        return view('blog.show', compact('slug'));
     }
 
     /**

@@ -24,25 +24,39 @@ Route::get('/buscar', [PageController::class, 'search'])->name('search');
 
 // Páginas informativas
 Route::get('/precios', [PageController::class, 'pricing'])->name('pricing');
-Route::get('/sobre-nosotros', [PageController::class, 'about'])->name('about');
-Route::get('/equipo', [PageController::class, 'team'])->name('team');
-Route::get('/trabaja-con-nosotros', [PageController::class, 'careers'])->name('careers');
 Route::get('/caracteristicas', [PageController::class, 'features'])->name('features');
+Route::get('/sobre-nosotros', [PageController::class, 'about'])->name('about');
+Route::get('/equipo', [PageController::class, 'about']); // Redirige a sobre-nosotros
 
 // Contacto
 Route::get('/contacto', [PageController::class, 'contact'])->name('contact');
 Route::post('/contacto', [PageController::class, 'contactSubmit'])->name('contact.submit');
 
-// Blog
-Route::get('/blog', [PageController::class, 'blog'])->name('blog.index');
-Route::get('/blog/{slug}', [PageController::class, 'blogShow'])->name('blog.show');
+// Blog - Rutas públicas
+use App\Http\Controllers\BlogPostController;
+
+Route::get('/blog', [BlogPostController::class, 'index'])->name('blog.index');
+Route::get('/blog/{post:slug}', [BlogPostController::class, 'show'])->name('blog.show');
+
+// Panel de administración - Blog
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('blog', \App\Http\Controllers\Admin\BlogPostController::class)
+        ->except(['show'])
+        ->names('blog');
+    
+    // Ruta adicional para mostrar un artículo en el panel de administración
+    Route::get('blog/{blogPost}', [\App\Http\Controllers\Admin\BlogPostController::class, 'show'])
+        ->name('blog.show');
+});
+
+
 
 // Páginas legales
 Route::prefix('legal')->name('legal.')->group(function () {
-    Route::get('/terminos', [PageController::class, 'terms'])->name('terms');
-    Route::get('/privacidad', [PageController::class, 'privacy'])->name('privacy');
-    Route::get('/cookies', [PageController::class, 'cookies'])->name('cookies');
     Route::get('/aviso-legal', [PageController::class, 'legalNotice'])->name('notice');
+    Route::get('/politica-privacidad', [PageController::class, 'privacy'])->name('privacy');
+    Route::get('/politica-cookies', [PageController::class, 'cookies'])->name('cookies');
+    Route::get('/terminos-condiciones', [PageController::class, 'terms'])->name('terms');
 });
 
 // Área de autenticación

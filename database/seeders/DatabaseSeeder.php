@@ -15,9 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Ejecutar el seeder de roles y permisos
+        // Ejecutar los seeders necesarios
         $this->call([
             RolePermissionSeeder::class,
+            BlogPostSeeder::class,
         ]);
 
         // Crear usuarios de prueba

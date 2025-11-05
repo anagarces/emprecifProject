@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'EmpreciF | Home (diagnóstico)')
+@section('title', 'EmpreciF | Inicio')
 
 @push('head')
     {{-- Metas/JSON-LD opcionales para la prueba: déjalo vacío de momento --}}
