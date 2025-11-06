@@ -16,7 +16,7 @@
             <h4>Empresa</h4>
             <ul class="footer-links">
                 <li><a href="{{ route('about') }}">Sobre Nosotros</a></li>
-                <li><a href="{{ route('about') }}#equipo">Nuestro Equipo</a></li>
+                <!--<li><a href="{{ route('about') }}#equipo">Nuestro Equipo</a></li> --->
                 <li><a href="{{ route('about') }}#trabaja-con-nosotros">Trabaja con Nosotros</a></li>
                 <li><a href="{{ route('blog.index') }}">Blog</a></li>
                 <li><a href="{{ route('contact') }}">Contacto</a></li>

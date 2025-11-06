@@ -34,6 +34,7 @@ Route::post('/contacto', [PageController::class, 'contactSubmit'])->name('contac
 
 // Blog - Rutas públicas
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\NewsletterController;
 use App\Models\BlogPost;
 
 Route::get('/blog', [BlogPostController::class, 'index'])->name('blog.index');
@@ -42,6 +43,10 @@ Route::get('/blog', [BlogPostController::class, 'index'])->name('blog.index');
 Route::get('/blog/{post}', function (BlogPost $post) {
     return app(BlogPostController::class)->show($post);
 })->name('blog.show');
+
+// Newsletter Subscription
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
+    ->name('newsletter.subscribe');
 
 // Panel de administración - Blog
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {

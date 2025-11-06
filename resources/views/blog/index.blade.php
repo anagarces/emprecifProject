@@ -20,87 +20,60 @@
     </div>
 
     <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem;">
-            <!-- Artículo 1 -->
-            <article style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);">
-                <div style="height: 250px; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 5rem;">📊</span>
-                </div>
-                <div style="padding: 2.5rem;">
-                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                        <span style="padding: 0.5rem 1rem; background: var(--light); color: var(--primary); border-radius: 50px; font-size: 0.875rem; font-weight: 700;">Guías</span>
-                        <span style="color: var(--gray); font-size: 0.875rem;">28 Oct 2025</span>
-                    </div>
-                    <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem;">
-                        <a href="{{ route('blog.show', 'como-interpretar-cuentas-anuales') }}" style="color: var(--dark); text-decoration: none;">Cómo Interpretar las Cuentas Anuales de una Empresa</a>
-                    </h2>
-                    <p style="font-size: 1.125rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.5rem;">
-                        Guía completa para entender balances, cuentas de resultados y ratios financieros. Aprende a analizar la salud financiera de cualquier empresa española.
-                    </p>
-                    <a href="{{ route('blog.show', 'como-interpretar-cuentas-anuales') }}" class="btn btn-outline">Leer Artículo →</a>
-                </div>
-            </article>
-
-            <!-- Artículo 2 -->
-            <article style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);">
-                <div style="height: 250px; background: linear-gradient(135deg, var(--accent), var(--secondary)); display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 5rem;">🔍</span>
-                </div>
-                <div style="padding: 2.5rem;">
-                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                        <span style="padding: 0.5rem 1rem; background: var(--light); color: var(--accent); border-radius: 50px; font-size: 0.875rem; font-weight: 700;">Due Diligence</span>
-                        <span style="color: var(--gray); font-size: 0.875rem;">25 Oct 2025</span>
-                    </div>
-                    <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem;">
-                        <a href="{{ route('blog.show', 'que-es-el-borme') }}" style="color: var(--dark); text-decoration: none;">Qué es el BORME y Cómo Utilizarlo</a>
-                    </h2>
-                    <p style="font-size: 1.125rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.5rem;">
-                        El Boletín Oficial del Registro Mercantil (BORME) es la fuente oficial de información empresarial en España. Descubre cómo sacarle el máximo provecho.
-                    </p>
-                    <a href="{{ route('blog.show', 'que-es-el-borme') }}" class="btn btn-outline">Leer Artículo →</a>
-                </div>
-            </article>
-
-            <!-- Artículo 3 -->
-            <article style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);">
-                <div style="height: 250px; background: linear-gradient(135deg, var(--secondary), var(--primary)); display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 5rem;">💰</span>
-                </div>
-                <div style="padding: 2.5rem;">
-                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                        <span style="padding: 0.5rem 1rem; background: var(--light); color: var(--secondary); border-radius: 50px; font-size: 0.875rem; font-weight: 700;">Análisis</span>
-                        <span style="color: var(--gray); font-size: 0.875rem;">22 Oct 2025</span>
-                    </div>
-                    <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem;">
-                        <a href="{{ route('blog.show', 'ratios-financieros-clave') }}" style="color: var(--dark); text-decoration: none;">Ratios Financieros Clave para Evaluar Empresas</a>
-                    </h2>
-                    <p style="font-size: 1.125rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.5rem;">
-                        Ratio de liquidez, solvencia, rentabilidad y endeudamiento. Aprende a calcularlos e interpretarlos para tomar decisiones de inversión informadas.
-                    </p>
-                    <a href="{{ route('blog.show', 'ratios-financieros-clave') }}" class="btn btn-outline">Leer Artículo →</a>
-                </div>
-            </article>
-
-            <!-- Artículo 4 -->
-            <article style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);">
-                <div style="height: 250px; background: linear-gradient(135deg, var(--primary), var(--accent)); display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 5rem;">⚖️</span>
-                </div>
-                <div style="padding: 2.5rem;">
-                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
-                        <span style="padding: 0.5rem 1rem; background: var(--light); color: var(--primary); border-radius: 50px; font-size: 0.875rem; font-weight: 700;">Legal</span>
-                        <span style="color: var(--gray); font-size: 0.875rem;">20 Oct 2025</span>
-                    </div>
-                    <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem;">
-                        <a href="{{ route('blog.show', 'due-diligence-checklist') }}" style="color: var(--dark); text-decoration: none;">Due Diligence: Checklist Completa para Inversores</a>
-                    </h2>
-                    <p style="font-size: 1.125rem; color: var(--gray); line-height: 1.7; margin-bottom: 1.5rem;">
-                        Checklist paso a paso para realizar una due diligence completa antes de invertir o adquirir una empresa. Evita sorpresas desagradables.
-                    </p>
-                    <a href="{{ route('blog.show', 'due-diligence-checklist') }}" class="btn btn-outline">Leer Artículo →</a>
-                </div>
-            </article>
-        </div>
+        @if($posts->count() > 0)
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem;">
+                @foreach($posts as $post)
+                    <article style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);">
+                        <div style="height: 250px; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                            @if($post->image)
+                                <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                            @else
+                                @php
+                                    // Default emojis based on category
+                                    $emojis = [
+                                        'Guías' => '📊',
+                                        'Due Diligence' => '🔍',
+                                        'Análisis' => '💰',
+                                        'Legal' => '⚖️',
+                                        'default' => '📄'
+                                    ];
+                                    $emoji = $emojis[$post->category] ?? $emojis['default'];
+                                @endphp
+                                <span style="font-size: 5rem;">{{ $emoji }}</span>
+                            @endif
+                        </div>
+                        <div style="padding: 2.5rem;">
+                            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                                @if($post->category)
+                                    <span style="padding: 0.5rem 1rem; background: var(--light); color: var(--primary); border-radius: 50px; font-size: 0.875rem; font-weight: 700;">{{ $post->category }}</span>
+                                @endif
+                                <span style="color: var(--gray); font-size: 0.875rem;">
+                                    {{ $post->published_at ? $post->published_at->translatedFormat('d M Y') : '' }}
+                                </span>
+                            </div>
+                            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; font-weight: 800; margin-bottom: 1rem;">
+                                <a href="{{ route('blog.show', $post) }}" style="color: var(--dark); text-decoration: none;">
+                                    {{ $post->title }}
+                                </a>
+                            </h2>
+                          <div class="text-gray-600">{!! $post->formatted_excerpt !!}</div>
+                            <a href="{{ route('blog.show', $post) }}" class="btn btn-outline">Leer Artículo →</a>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+            
+            <!-- Paginación -->
+            <div style="margin-top: 3rem; text-align: center;">
+                {{ $posts->links() }}
+            </div>
+        @else
+            <div style="text-align: center; padding: 4rem 0;">
+                <p style="font-size: 1.25rem; color: var(--gray);">
+                    No hay artículos publicados en este momento. ¡Vuelve pronto para ver nuevas publicaciones!
+                </p>
+            </div>
+        @endif
     </div>
 </section>
 
@@ -134,6 +107,6 @@
 </script>
 @endpush
 
-
+ 
 
 @endsection
