@@ -42,7 +42,7 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="userMenu">
                         <li><a class="dropdown-item" href="{{ route('dashboard') }}">Panel de Control</a></li>
-                        <li><a class="dropdown-item" href="{{ route('profile') }}">Mi Perfil</a></li>
+                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Mi Perfil</a></li>
                         <li><a class="dropdown-item" href="{{ route('subscription.plans') }}">Mi Suscripción</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li>

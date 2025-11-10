@@ -1,65 +1,47 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SubscriptionController;
-use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{
+    PageController,
+    ProfileController,
+    SubscriptionController,
+    CompanyController,
+    DashboardController,
+    BlogPostController,
+    NewsletterController
+};
+use App\Models\BlogPost;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| RUTAS PÚBLICAS
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+| Accesibles para visitantes sin iniciar sesión
 */
 
-// Página de inicio
 Route::get('/', [PageController::class, 'home'])->name('home');
-
-// Búsqueda
 Route::get('/buscar', [PageController::class, 'search'])->name('search');
 
-// Páginas informativas
+// Información de marketing
 Route::get('/precios', [PageController::class, 'pricing'])->name('pricing');
 Route::get('/caracteristicas', [PageController::class, 'features'])->name('features');
 Route::get('/sobre-nosotros', [PageController::class, 'about'])->name('about');
-Route::get('/equipo', [PageController::class, 'about']); // Redirige a sobre-nosotros
+Route::get('/equipo', [PageController::class, 'about']); // Redirige a "sobre-nosotros"
 
 // Contacto
 Route::get('/contacto', [PageController::class, 'contact'])->name('contact');
 Route::post('/contacto', [PageController::class, 'contactSubmit'])->name('contact.submit');
 
-// Blog - Rutas públicas
-use App\Http\Controllers\BlogPostController;
-use App\Http\Controllers\NewsletterController;
-use App\Models\BlogPost;
-
+// Blog público
 Route::get('/blog', [BlogPostController::class, 'index'])->name('blog.index');
+Route::get('/blog/{post}', fn (BlogPost $post) => app(BlogPostController::class)->show($post))
+    ->name('blog.show');
 
-// Ruta para mostrar un post del blog
-Route::get('/blog/{post}', function (BlogPost $post) {
-    return app(BlogPostController::class)->show($post);
-})->name('blog.show');
+// Newsletter
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 
-// Newsletter Subscription
-Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
-    ->name('newsletter.subscribe');
-
-// Panel de administración - Blog
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('blog', \App\Http\Controllers\Admin\BlogPostController::class)
-        ->except(['show'])
-        ->names('blog');
-    
-    // Ruta adicional para mostrar un artículo en el panel de administración
-    Route::get('blog/{blogPost}', [\App\Http\Controllers\Admin\BlogPostController::class, 'show'])
-        ->name('blog.show');
-});
-
-
+// Página de empresa pública
+Route::get('/empresa/{company:slug}', [CompanyController::class, 'showPublic'])->name('company.show');
 
 // Páginas legales
 Route::prefix('legal')->name('legal.')->group(function () {
@@ -69,22 +51,33 @@ Route::prefix('legal')->name('legal.')->group(function () {
     Route::get('/terminos-condiciones', [PageController::class, 'terms'])->name('terms');
 });
 
-// Área de autenticación
+/*
+|--------------------------------------------------------------------------
+| AUTENTICACIÓN
+|--------------------------------------------------------------------------
+| Controlado por Breeze (login, registro, reset password, etc.)
+*/
 require __DIR__.'/auth.php';
 
-// Rutas protegidas por autenticación
-Route::middleware(['auth', 'verified'])->group(function () {
-    // Dashboard
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+// Login con redes sociales (Google, etc.)
+Route::get('login/{provider}', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'redirectToProvider'])
+    ->name('login.provider');
+Route::get('login/{provider}/callback', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'handleProviderCallback'])
+    ->name('login.provider.callback');
 
-    // Perfil de usuario
-    Route::prefix('perfil')->name('profile.')->group(function () {
-        Route::get('/', [ProfileController::class, 'edit'])->name('edit');
-        Route::patch('/', [ProfileController::class, 'update'])->name('update');
-        Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
-    });
+/*
+|--------------------------------------------------------------------------
+| RUTAS PROTEGIDAS (usuario autenticado y verificado)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Panel principal
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Perfil
+    Route::get('/perfil', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/perfil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Suscripciones
     Route::prefix('suscripcion')->name('subscription.')->group(function () {
@@ -94,21 +87,32 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/cancelar', [SubscriptionController::class, 'cancel'])->name('cancel');
         Route::get('/portal', [SubscriptionController::class, 'portal'])->name('portal');
     });
+
+    // Panel de administración del blog
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('blog', \App\Http\Controllers\Admin\BlogPostController::class)
+            ->except(['show'])
+            ->names('blog');
+        Route::get('blog/{blogPost}', [\App\Http\Controllers\Admin\BlogPostController::class, 'show'])
+            ->name('blog.show');
+    });
 });
 
-// Ruta de bienvenida (redirige a la página de inicio)
-Route::get('/welcome', function () {
-    return redirect()->route('home');
+/*
+|--------------------------------------------------------------------------
+| RUTAS PREMIUM / SUSCRIPCIÓN ACTIVA
+|--------------------------------------------------------------------------
+| Requieren que el usuario tenga plan activo o esté en prueba
+*/
+Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
+    Route::get('/empresa/{company:slug}/premium', [CompanyController::class, 'showPremium'])
+        ->name('company.premium');
 });
 
-// Manejo de rutas 404 personalizadas
-Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
-});
-
-// Rutas de autenticación social
-Route::get('login/{provider}', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'redirectToProvider'])
-    ->name('login.provider');
-    
-Route::get('login/{provider}/callback', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'handleProviderCallback'])
-    ->name('login.provider.callback');
+/*
+|--------------------------------------------------------------------------
+| RUTAS VARIAS
+|--------------------------------------------------------------------------
+*/
+Route::get('/welcome', fn () => redirect()->route('home'));
+Route::fallback(fn () => response()->view('errors.404', [], 404));

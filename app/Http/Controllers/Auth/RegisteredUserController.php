@@ -27,31 +27,29 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'terms' => ['required', 'accepted'],
-        ]);
+  public function store(Request $request)
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
 
-        // Crear el usuario con período de prueba de 15 días
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'trial_ends_at' => now()->addDays(15), // 15 días de prueba
-        ]);
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'trial_ends_at' => now()->addDays(15), // 15-day trial
+    ]);
 
-        // Assign default user role
-        $user->assignRole('user');
+    // Assign default 'usuario' role
+    $user->assignRole('usuario');
 
-        event(new Registered($user));
-        Auth::login($user);
+    event(new Registered($user));
 
-        // Redirigir a la página de planes después del registro
-        return redirect()->route('subscription.plans')
-            ->with('status', '¡Bienvenido a Emprecif! Disfruta de 15 días de prueba gratuita.');
-    }
+    Auth::login($user);
+
+    return redirect(route('dashboard'));
+}
+
 }

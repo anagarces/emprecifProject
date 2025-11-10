@@ -9,19 +9,30 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
+public function run(): void
+{
+    // Clear all roles and permissions cache
+    app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        // Ejecutar los seeders necesarios
-        $this->call([
-            RolePermissionSeeder::class,
-            BlogPostSeeder::class,
-        ]);
+    // Run seeders
+    $this->call([
+        RolesAndPermissionsSeeder::class,
+        TestUsersSeeder::class,
+        BlogPostSeeder::class,
+    ]);
 
-        // Crear usuarios de prueba
-        User::factory(10)->create();
+    // Create test users if not in production
+    if (!app()->environment('production')) {
+        // Create regular users
+        $users = \App\Models\User::factory(5)->create();
+        
+        // Assign 'usuario' role to new users if they don't have any roles
+        foreach ($users as $user) {
+            if ($user->roles->isEmpty()) {
+                $user->assignRole('usuario');
+                $user->update(['trial_ends_at' => now()->addDays(15)]);
+            }
+        }
     }
+}
 }
