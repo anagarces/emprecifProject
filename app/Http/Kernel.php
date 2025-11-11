@@ -65,10 +65,10 @@ protected $middlewareAliases = [
     'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-    //  Middlewares personalizados de EmpreciF
+    // Middlewares personalizados de EmpreciF
     'premium' => \App\Http\Middleware\EnsureUserIsPremium::class,
-    'subscribed' => \App\Http\Middleware\CheckSubscription::class,
-    'trial' => \App\Http\Middleware\CheckTrialPeriod::class,
+    'subscription' => \App\Http\Middleware\CheckTrialPeriod::class,
+    'trial.access' => \App\Http\Middleware\CheckTrialAccess::class,
 
     //  Spatie Roles & Permissions
     'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,

@@ -27,6 +27,8 @@ class User extends Authenticatable
         'stripe_id',
         'pm_type',
         'pm_last_four',
+        'companies_viewed',
+        'can_download_reports',
     ];
 
     /**
@@ -44,6 +46,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'trial_ends_at' => 'datetime',
         'password' => 'hashed',
+        'can_download_reports' => 'boolean',
     ];
 
     /**
@@ -85,6 +88,70 @@ class User extends Authenticatable
         return $this->subscribed('default') || $this->isOnTrial();
     }
     
+    /**
+     * Get the subscription that is currently on trial.
+     *
+     * @return \Laravel\Cashier\Subscription|null
+     */
+    /**
+     * Check if user can access a company based on their trial status and view count
+     *
+     * @return array [canAccess: bool, message: string|null]
+     */
+    public function canAccessCompany(): array
+    {
+        // Admins and premium users have unlimited access
+        if ($this->hasRole(['admin', 'premium'])) {
+            return ['canAccess' => true, 'message' => null];
+        }
+
+        // Check if user is on trial
+        if ($this->isOnTrial()) {
+            if ($this->companies_viewed >= 2) {
+                return [
+                    'canAccess' => false,
+                    'message' => 'Has alcanzado el límite de consultas durante tu prueba. Actualiza tu plan para continuar.'
+                ];
+            }
+            return ['canAccess' => true, 'message' => null];
+        }
+
+        // Trial has ended and user is not premium/admin
+        return [
+            'canAccess' => false,
+            'message' => 'Tu periodo de prueba ha terminado. Actualiza tu plan para continuar.'
+        ];
+    }
+
+    /**
+     * Increment the company view counter
+     */
+    public function incrementCompanyViewCount(): void
+    {
+        if ($this->hasRole('usuario') && $this->isOnTrial()) {
+            $this->increment('companies_viewed');
+        }
+    }
+
+    /**
+     * Check if user can download reports
+     */
+    public function canDownloadReports(): bool
+    {
+        // Admins and premium users can always download
+        if ($this->hasRole(['admin', 'premium'])) {
+            return true;
+        }
+
+        // Users on trial cannot download reports
+        if ($this->isOnTrial()) {
+            return false;
+        }
+
+        // For users with trial ended, check their subscription status
+        return $this->hasActiveSubscription();
+    }
+
     /**
      * Get the subscription that is currently on trial.
      *

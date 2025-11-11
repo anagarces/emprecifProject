@@ -17,14 +17,42 @@ class PageController extends Controller
         return view('home');
     }
 
-    /**
-     * Muestra la página de búsqueda
-     */
-    public function search(Request $request)
-    {
-        $searchController = new \App\Http\Controllers\SearchController();
-        return $searchController->index($request);
+   /**
+ * Muestra la búsqueda pública de empresas
+ */
+public function search(Request $request)
+{
+    $query = trim($request->input('q', ''));
+
+    // Datos simulados o de prueba para mostrar algo en la vista pública
+    $results = [];
+
+    if ($query) {
+        // ⚠️ En el futuro, aquí llamarás a la API pública de empresas
+        // Por ahora simulamos resultados básicos.
+        $results = [
+            [
+                'nombre' => 'TECNOLOGÍA AVANZADA SL',
+                'nif' => 'A12345678',
+                'localidad' => 'Barcelona',
+                'provincia' => 'Barcelona',
+                'estado' => 'ACTIVA',
+            ],
+            [
+                'nombre' => 'INNOVACIÓN TECNOLÓGICA SA',
+                'nif' => 'A98765432',
+                'localidad' => 'Madrid',
+                'provincia' => 'Madrid',
+                'estado' => 'ACTIVA',
+            ],
+        ];
     }
+
+    // 🔁 Reutilizamos la misma vista que usa el dashboard
+    return view('company.search', [
+        'results' => $results,
+    ]);
+}
 
     /**
      * Muestra la página de precios

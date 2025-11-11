@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+
+//Verifica si el usuario es premium o admin
 class EnsureUserIsPremium
 {
     /**
@@ -19,13 +21,13 @@ class EnsureUserIsPremium
     {
         $user = $request->user();
         
-        // Allow access if user is admin or has premium access
-        if ($user && ($user->isAdmin() || $user->isPremium())) {
+        // Allow access to admins and premium users
+        if ($user && ($user->hasRole('admin') || $user->hasRole('premium'))) {
             return $next($request);
         }
 
-        // Redirect to pricing page if not premium
-        return redirect()->route('pricing')
-            ->with('error', 'You need a premium subscription to access this content.');
+        // Redirect to subscription plans if not premium or admin
+        return redirect()->route('subscription.plans')
+            ->with('error', 'Necesitas una suscripción premium para acceder a esta sección.');
     }
 }

@@ -8,7 +8,9 @@ use App\Http\Controllers\{
     CompanyController,
     DashboardController,
     BlogPostController,
-    NewsletterController
+    NewsletterController,
+    SettingsController,
+    ReportController
 };
 use App\Models\BlogPost;
 
@@ -67,10 +69,10 @@ Route::get('login/{provider}/callback', [\App\Http\Controllers\Auth\Authenticate
 
 /*
 |--------------------------------------------------------------------------
-| RUTAS PROTEGIDAS (usuario autenticado y verificado)
+| RUTAS PROTEGIDAS (usuario autenticado, verificado y con suscripción activa o en prueba)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'subscription'])->group(function () {
     // Panel principal
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -88,25 +90,40 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/portal', [SubscriptionController::class, 'portal'])->name('portal');
     });
 
-    // Panel de administración del blog
-    Route::prefix('admin')->name('admin.')->group(function () {
+    // Rutas con restricciones de periodo de prueba
+    Route::middleware(['trial.access'])->group(function () {
+        // Búsqueda y visualización de empresas
+        Route::prefix('empresas')->name('company.')->group(function () {
+            Route::get('/buscar', [CompanyController::class, 'search'])->name('search');
+            Route::get('/buscar/resultados', [CompanyController::class, 'searchAjax'])->name('search.ajax');
+            Route::get('/{company:slug}', [CompanyController::class, 'showPublic'])->name('show');
+        });
+        
+        // Informes
+        Route::prefix('informes')->name('reports.')->group(function () {
+            Route::get('/', [ReportController::class, 'index'])->name('index');
+            Route::get('/empresa/{company:slug}', [ReportController::class, 'show'])->name('show');
+            Route::get('/descargar/{company:slug}', [ReportController::class, 'download'])->name('download');
+        });
+    });
+    
+    // Configuración de usuario
+    Route::get('/configuracion', [SettingsController::class, 'index'])->name('settings');
+
+    // Rutas premium exclusivas
+    Route::middleware(['premium'])->group(function () {
+        Route::get('/empresa/{company:slug}/premium', [CompanyController::class, 'showPremium'])
+            ->name('company.premium');
+    });
+
+    // Panel de administración del blog (solo para administradores)
+    Route::middleware(['role:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::resource('blog', \App\Http\Controllers\Admin\BlogPostController::class)
             ->except(['show'])
             ->names('blog');
         Route::get('blog/{blogPost}', [\App\Http\Controllers\Admin\BlogPostController::class, 'show'])
             ->name('blog.show');
     });
-});
-
-/*
-|--------------------------------------------------------------------------
-| RUTAS PREMIUM / SUSCRIPCIÓN ACTIVA
-|--------------------------------------------------------------------------
-| Requieren que el usuario tenga plan activo o esté en prueba
-*/
-Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
-    Route::get('/empresa/{company:slug}/premium', [CompanyController::class, 'showPremium'])
-        ->name('company.premium');
 });
 
 /*

@@ -11,7 +11,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'premium' => \App\Http\Middleware\EnsureUserIsPremium::class,
+            'subscription' => \App\Http\Middleware\CheckTrialPeriod::class,
+            'trial.access' => \App\Http\Middleware\CheckTrialAccess::class,
+            // Middlewares de Spatie
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
