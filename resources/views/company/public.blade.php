@@ -4,6 +4,31 @@
 
 @section('content')
 <div class="container mx-auto px-4 py-8">
+  @auth
+    @if(auth()->user()->isOnTrial())
+        <!-- Trial User Notice -->
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-yellow-700">
+                        Estás viendo solo los datos públicos de esta empresa. Actualiza tu plan para acceder a información completa.
+                        @if(auth()->user()->trialDaysRemaining() <= 3)
+                            <a href="{{ route('subscription.plans') }}" class="font-medium underline text-yellow-700 hover:text-yellow-600">
+                                Actualizar ahora
+                            </a>
+                        @endif
+                    </p>
+                </div>
+            </div>
+        </div>
+    @endif
+@endauth
+
     <!-- Company Header -->
     <div class="bg-white rounded-lg shadow-md p-6 mb-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
@@ -25,8 +50,8 @@
                     </span>
                 </div>
             </div>
-            <div class="mt-4 md:mt-0">
-                @auth
+            @auth
+                <div class="mt-4 md:mt-0">
                     <button id="favorite-btn" class="flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" 
                             data-company-id="{{ $company->id }}" 
                             data-is-favorite="{{ $isFavorite ? 'true' : 'false' }}">
@@ -39,15 +64,17 @@
                             {{ $isFavorite ? 'En favoritos' : 'Guardar en favoritos' }}
                         </span>
                     </button>
-                @else
+                </div>
+            @else
+                <div class="mt-4 md:mt-0">
                     <a href="{{ route('login') }}" class="flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
                         <svg class="h-5 w-5 mr-2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                         </svg>
                         Inicia sesión para guardar
                     </a>
-                @endauth
-            </div>
+                </div>
+            @endauth
         </div>
 
         <!-- Basic Info -->
@@ -64,6 +91,30 @@
                 <h3 class="text-sm font-medium text-gray-500">Sector</h3>
                 <p class="mt-1 text-sm text-gray-900">{{ $company->sector }}</p>
             </div>
+            @if(auth()->check() && !auth()->user()->isOnTrial() && !auth()->user()->isPremium())
+                @if($company->phone)
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-medium text-gray-500">Teléfono</h3>
+                        <p class="mt-1 text-sm text-gray-900">{{ $company->phone }}</p>
+                    </div>
+                @endif
+                @if($company->website)
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-medium text-gray-500">Sitio web</h3>
+                        <p class="mt-1 text-sm text-gray-900">
+                            <a href="{{ $company->website }}" target="_blank" class="text-blue-600 hover:underline">
+                                {{ parse_url($company->website, PHP_URL_HOST) }}
+                            </a>
+                        </p>
+                    </div>
+                @endif
+                @if($company->founded_year)
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="text-sm font-medium text-gray-500">Año de fundación</h3>
+                        <p class="mt-1 text-sm text-gray-900">{{ $company->founded_year }}</p>
+                    </div>
+                @endif
+            @endif
         </div>
 
         <!-- Description -->

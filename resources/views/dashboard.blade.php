@@ -208,6 +208,29 @@
                     </div>
                 </div>
 
+{{-- Aviso de prueba o suscripción --}}
+@auth
+    @if(!auth()->user()->hasActiveSubscription() || auth()->user()->isOnTrial())
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-yellow-800">
+                        Estás utilizando tu período de prueba o no tienes una suscripción activa.
+                        <a href="{{ route('subscription.plans') }}" class="font-medium text-yellow-900 underline hover:text-yellow-800">
+                            Actualiza tu plan aquí
+                        </a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    @endif
+@endauth
+
                 <!-- Subscription Status -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <div class="flex items-start">
@@ -394,11 +417,6 @@
             }
         };
     });
-</script>
-@endpush
-        });
-    }
-});
 </script>
 @endpush
 @endsection
