@@ -76,6 +76,22 @@ Route::middleware(['auth', 'verified', 'subscription'])->group(function () {
     // Panel principal
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+        // Favoritos
+    Route::get('/favoritos', function () {
+        return view('placeholders.favorites');
+    })->name('favorites.index');
+
+    // Alertas
+    Route::get('/alertas', function () {
+        return view('placeholders.alerts');
+    })->name('alerts.index');
+
+    // Configuración
+    Route::get('/configuracion', function () {
+        return view('placeholders.settings');
+    })->name('settings');
+
+
     // Perfil
     Route::get('/perfil', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
