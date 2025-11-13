@@ -48,9 +48,15 @@ class User extends Authenticatable
      * Determina si el usuario está en período de prueba.
      */
     public function isOnTrial(): bool
-    {
-        return $this->trial_ends_at && $this->trial_ends_at->isFuture();
+{
+    // Administradores y premium nunca son trial
+    if ($this->isAdmin() || $this->hasRole('premium')) {
+        return false;
     }
+
+    return $this->trial_ends_at && $this->trial_ends_at->isFuture();
+}
+
 
     /**
      * Días restantes del período de prueba.
@@ -61,17 +67,19 @@ class User extends Authenticatable
             return 0;
         }
 
-        return max(0, now()->diffInDays($this->trial_ends_at, false));
+        return max(0, now()->diffInDays($this->trial_ends_at));
+
     }
 
     /**
      * Verifica si el usuario tiene una suscripción activa.
-     * Incluye los que aún están en prueba.
      */
-    public function hasActiveSubscription(): bool
-    {
-        return $this->subscribed('default') || $this->isOnTrial();
-    }
+  public function hasActiveSubscription(): bool
+{
+    // Solo aplica si algún día Cashier esté funcionando
+    return $this->subscribed('default');
+}
+
 
     /**
      * Controla el acceso a las empresas.
@@ -133,7 +141,37 @@ class User extends Authenticatable
      * Determina si el usuario tiene acceso premium.
      */
     public function isPremium(): bool
-    {
-        return $this->isAdmin() || $this->hasRole('premium') || $this->hasActiveSubscription();
+        {
+     // Admin siempre tiene acceso premium
+    if ($this->isAdmin()) {
+            return true;
     }
+
+    // Rol premium explícito
+    if ($this->hasRole('premium')) {
+            return true;
+    }
+
+    // NO consideramos trial como premium
+    return false;
+}
+
+
+
+    public function isFree()
+{
+    // Premium o admin jamás son free
+    if ($this->isPremium()) {
+        return false;
+    }
+
+    // Trial NO es free
+    if ($this->isOnTrial()) {
+        return false;
+    }
+
+    // Todo lo demás = usuario free real
+    return true;
+}
+
 }

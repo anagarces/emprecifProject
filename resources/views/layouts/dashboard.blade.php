@@ -77,6 +77,27 @@
             color: var(--primary);
         }
 
+        /* Enlaces del footer del sidebar (Volver / Cerrar sesión) */
+        .sidebar-footer-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray);
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .sidebar-footer-link:hover {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        .sidebar-footer-link.danger {
+            color: var(--danger);
+        }
+
         /* Main Content */
         .main-content {
             padding: 3rem;
@@ -112,8 +133,15 @@
                     {{ Auth::user()->name }}
                 </h3>
                 <p style="font-size: 0.875rem; color: var(--gray); margin:0;">
-                    {{ Auth::user()->hasRole('premium') ? 'Plan Premium' : 'Plan Gratis' }}
-                </p>
+    @if(Auth::user()->hasRole('admin'))
+        Administrador
+    @elseif(Auth::user()->hasRole('premium'))
+        Plan Premium
+    @else
+        Plan Gratis
+    @endif
+</p>
+
             </div>
 
             {{-- Navigation --}}
@@ -130,12 +158,13 @@
 
             {{-- Footer --}}
             <div style="margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #E2E8F0;">
-                <a href="{{ route('home') }}" class="sidebar-nav a">← Volver al Inicio</a>
+                <a href="{{ route('home') }}" class="sidebar-footer-link">← Volver al Inicio</a>
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
-                        style="background:none;border:none;padding:0;margin-top:0.75rem;color: var(--danger);font-weight:700;cursor:pointer;">
+                        class="sidebar-footer-link danger"
+                        style="background:none;border:none;padding:0;margin-top:0.25rem;text-align:left;cursor:pointer;">
                         🚪 Cerrar sesión
                     </button>
                 </form>
