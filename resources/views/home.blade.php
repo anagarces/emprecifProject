@@ -1,353 +1,393 @@
 @extends('layouts.app')
 
-@section('title', 'EmpreciF | Inicio')
+@section('title', 'EmpreciF | Consultar Datos de Empresas Españolas Gratis - Información Empresarial del BORME 2025')
 
 @push('head')
-    {{-- Metas/JSON-LD opcionales para la prueba: déjalo vacío de momento --}}
+    {{-- SEO --}}
+    <meta name="description" content="Consulta GRATIS información de más de 3.2M empresas españolas: NIF, CIF, administradores, cuentas anuales, facturación. Datos oficiales del BORME actualizados diariamente.">
+    <meta name="keywords" content="consultar empresa por nif, buscar empresa por cif, datos empresas españa, información empresarial, borme empresas, cuentas anuales empresas, facturación empresa">
+
+    {{-- Open Graph --}}
+    <meta property="og:title" content="EmpreciF - Información Empresarial Oficial de España">
+    <meta property="og:description" content="Consulta datos de más de 3.2 millones de empresas españolas. Información oficial del BORME actualizada diariamente.">
+
+    {{-- JSON-LD ORGANIZATION --}}
+    <script type="application/ld+json">
+    @verbatim
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "EmpreciF",
+      "url": "https://emprecif.com",
+      "logo": "https://emprecif.com/images/logo_emprecif_wordmark.png",
+      "description": "Plataforma líder de información empresarial en España con datos oficiales del BORME",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Calle Mestre Laporta, Nº 2, 1º piso, puerta 2",
+        "addressLocality": "Alcoy",
+        "addressRegion": "Alicante",
+        "postalCode": "03801",
+        "addressCountry": "ES"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+34-658-17-08-09",
+        "contactType": "customer service",
+        "email": "[email protected]"
+      }
+    }
+    @endverbatim
+    </script>
+
+    {{-- JSON-LD WEBSITE --}}
+    <script type="application/ld+json">
+    @verbatim
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "EmpreciF",
+      "url": "https://emprecif.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://emprecif.com/buscar?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    @endverbatim
+    </script>
 @endpush
 
 @section('content')
 
-<!--Hero Section-->
-<section class="relative bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16 md:py-24 overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute inset-0" style="background: url('{{ asset('images/pattern.png') }}') center;"></div>
-    </div>
-    <div class="container mx-auto px-4 relative z-10">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-space-grotesk">
-                Consulta <span class="text-yellow-300">datos de empresas</span> españolas
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-                Accede a información oficial del BORME de más de 3.2 millones de empresas en España
+
+
+    {{-- HERO SECTION --}}
+    <div class="hero">
+        <div class="hero-content">
+            <h1>La Radiografía Financiera de Cualquier Empresa Española en Tiempo Real</h1>
+
+            <p class="subtitle">
+                Accede a información oficial de <strong>más de 3.2 millones de empresas</strong> españolas:
+                NIF, CIF, administradores, cuentas anuales, facturación y actos del BORME.
+                Datos verificados del Registro Mercantil actualizados diariamente.
             </p>
-            
-            <!-- Search Box -->
-            <div class="max-w-2xl mx-auto mb-12">
-                <form action="{{ route('search') }}" method="GET" class="relative">
-                    <div class="relative">
-                        <input 
-                            type="text" 
-                            name="q"
-                            placeholder="Busca por nombre, CIF o actividad..." 
-                            class="w-full px-6 py-4 pr-40 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-lg"
-                            autocomplete="off"
-                        >
-                        <button type="submit" class="absolute right-2 top-2 bg-indigo-700 hover:bg-indigo-800 text-white font-semibold py-2 px-6 rounded-full transition duration-300 transform hover:scale-105">
-                            Buscar
-                        </button>
-                    </div>
-                </form>
-                <p class="text-sm text-indigo-100 mt-2">
-                    Ejemplo: "Telefónica", "A12345678", "restaurante en Madrid"
-                </p>
+
+            {{-- SEARCH BOX --}}
+            <form action="{{ route('search') }}" method="GET" class="search-box">
+                <input 
+                    type="text"
+                    name="q"
+                    placeholder="Busca por nombre de empresa, NIF/CIF o administrador..."
+                    aria-label="Buscar empresa"
+                    required
+                >
+                <button type="submit">🔍 Buscar Ahora</button>
+            </form>
+
+            {{-- TRUST BADGES --}}
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <span style="color:#F59E0B;">⭐⭐⭐⭐⭐</span>
+                    <span><strong>4.9/5</strong> en 2.847 reseñas</span>
+                </div>
+                <div class="trust-badge">
+                    <span style="color:#10B981;">✓</span>
+                    <span>Sin tarjeta de crédito</span>
+                </div>
+                <div class="trust-badge">
+                    <span style="color:#10B981;">✓</span>
+                    <span>Datos oficiales BORME</span>
+                </div>
+                <div class="trust-badge">
+                    <span style="color:#10B981;">✓</span>
+                    <span>Actualización diaria</span>
+                </div>
             </div>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                @guest
-                    <a href="{{ route('register') }}" class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 flex items-center gap-2">
-                        <span>Empezar gratis</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                    <a href="{{ route('pricing') }}" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-indigo-700 font-semibold py-3 px-8 rounded-full transition duration-300 flex items-center gap-2">
-                        Ver planes
-                    </a>
-                @else
-                    <a href="{{ route('dashboard') }}" class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 flex items-center gap-2">
-                        <span>Ir al panel de control</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </a>
-                @endguest
+        </div>
+
+        {{-- DASHBOARD PREVIEW --}}
+        <div class="dashboard-preview">
+            <div class="dashboard-header">
+                <div class="company-info">
+                    <h3>TECNOLOGÍA AVANZADA SL</h3>
+                    <p>NIF: A12345678 • Barcelona</p>
+                </div>
+                <div class="status-badge">✓ ACTIVA</div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-label">Facturación 2024</div>
+                    <div class="metric-value">2.4M €</div>
+                </div>
+                <div class="metric-card secondary">
+                    <div class="metric-label">Resultado Neto</div>
+                    <div class="metric-value">+347K €</div>
+                </div>
             </div>
         </div>
     </div>
-</section>
 
-<!-- Features Section -->
-<section class="py-20 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-space-grotesk">¿Qué información puedes consultar en EmpreciF?</h2>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                Accede a la base de datos más completa de información empresarial de España. Datos oficiales del BORME (Boletín Oficial del Registro Mercantil) actualizados diariamente desde 2009.
-            </p>
-        </div>
-        
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Feature 1 -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                <div class="text-5xl mb-6 text-indigo-600">
-                    🏢
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-gray-900 font-space-grotesk">Datos Mercantiles Completos</h3>
-                <p class="text-gray-600 mb-4">
-                    Accede a toda la información oficial de empresas: denominación, NIF, domicilio social, fecha de constitución, capital social, objeto social, administradores, cargos y más.
-                </p>
-                <a href="#" class="text-indigo-600 font-medium inline-flex items-center hover:text-indigo-800 transition-colors">
-                    Ver ejemplo
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-            
-            <!-- Feature 2 -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                <div class="text-5xl mb-6 text-green-600">
-                    📊
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-gray-900 font-space-grotesk">Cuentas Anuales</h3>
-                <p class="text-gray-600 mb-4">
-                    Consulta las cuentas anuales depositadas en el Registro Mercantil: balance, cuenta de pérdidas y ganancias, memoria, informe de gestión y dictamen de auditoría.
-                </p>
-                <a href="#" class="text-indigo-600 font-medium inline-flex items-center hover:text-indigo-800 transition-colors">
-                    Ver ejemplo
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-            
-            <!-- Feature 3 -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                <div class="text-5xl mb-6 text-blue-600">
-                    🔍
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-gray-900 font-space-grotesk">Información de Contacto</h3>
-                <p class="text-gray-600 mb-4">
-                    Encuentra teléfonos, correos electrónicos y direcciones de contacto de empresas, incluyendo datos de contacto de administradores y representantes legales.
-                </p>
-                <a href="#" class="text-indigo-600 font-medium inline-flex items-center hover:text-indigo-800 transition-colors">
-                    Ver ejemplo
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-            
-            <!-- Feature 4 -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                <div class="text-5xl mb-6 text-purple-600">
-                    📈
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-gray-900 font-space-grotesk">Informes Avanzados</h3>
-                <p class="text-gray-600 mb-4">
-                    Obtén informes detallados con análisis financieros, ratios, evolución histórica, comparativas del sector y evaluación de riesgos crediticios.
-                </p>
-                <a href="#" class="text-indigo-600 font-medium inline-flex items-center hover:text-indigo-800 transition-colors">
-                    Ver ejemplo
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-            
-            <!-- Feature 5 -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                <div class="text-5xl mb-6 text-red-500">
-                    🔔
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-gray-900 font-space-grotesk">Alertas Personalizadas</h3>
-                <p class="text-gray-600 mb-4">
-                    Configura alertas para recibir notificaciones sobre cambios en empresas que te interesan: modificaciones de capital, cambios de administradores, concursos de acreedores, etc.
-                </p>
-                <a href="#" class="text-indigo-600 font-medium inline-flex items-center hover:text-indigo-800 transition-colors">
-                    Configurar alertas
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-            
-            <!-- Feature 6 -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                <div class="text-5xl mb-6 text-yellow-500">
-                    🔄
-                </div>
-                <h3 class="text-xl font-bold mb-3 text-gray-900 font-space-grotesk">Datos en Tiempo Real</h3>
-                <p class="text-gray-600 mb-4">
-                    Accede a información actualizada diariamente directamente del BORME y otras fuentes oficiales. Recibe notificaciones de cambios en las empresas que sigas.
-                </p>
-                <a href="#" class="text-indigo-600 font-medium inline-flex items-center hover:text-indigo-800 transition-colors">
-                    Ver actualizaciones
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Stats Section -->
-<section class="py-20 bg-gradient-to-r from-indigo-600 to-purple-700 text-white">
-    <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-4 gap-8 text-center">
-            <div class="p-6">
-                <div class="text-4xl font-bold mb-2">3.2M+</div>
-                <p class="text-indigo-100">Empresas activas</p>
-            </div>
-            <div class="p-6">
-                <div class="text-4xl font-bold mb-2">15M+</div>
-                <p class="text-indigo-100">Documentos indexados</p>
-            </div>
-            <div class="p-6">
-                <div class="text-4xl font-bold mb-2">99.9%</div>
-                <p class="text-indigo-100">Precisión en datos</p>
-            </div>
-            <div class="p-6">
-                <div class="text-4xl font-bold mb-2">24/7</div>
-                <p class="text-indigo-100">Actualización continua</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- How It Works Section -->
-<section class="py-20 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-space-grotesk">¿Cómo funciona EmpreciF?</h2>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                Obtén la información que necesitas en solo 3 sencillos pasos
+    {{-- FEATURES SECTION --}}
+    <section>
+        <div class="section-header">
+            <h2>¿Qué Información Empresarial Puedes Consultar en EmpreciF?</h2>
+            <p>
+                Accede a la base de datos más completa de información empresarial de España.
+                Datos oficiales del BORME (Boletín Oficial del Registro Mercantil) actualizados diariamente desde 2009.
             </p>
         </div>
-        
-        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <!-- Step 1 -->
-            <div class="text-center p-6">
-                <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 text-2xl font-bold mb-4 mx-auto">1</div>
-                <h3 class="text-xl font-bold mb-3 text-gray-900">Busca una empresa</h3>
-                <p class="text-gray-600">
-                    Introduce el nombre, CIF o actividad de la empresa que deseas consultar en nuestro buscador.
+
+        <div class="features-grid">
+            {{-- Datos Mercantiles --}}
+            <div class="feature-card">
+                <div class="feature-icon">🏢</div>
+                <h3>Datos Mercantiles Completos</h3>
+                <p>
+                    Consulta toda la información mercantil oficial de cualquier empresa española registrada en el Registro Mercantil.
                 </p>
+                <ul class="feature-list">
+                    <li>NIF/CIF y razón social completa</li>
+                    <li>Domicilio social y sede real</li>
+                    <li>Capital social y participaciones</li>
+                    <li>Forma jurídica (SL, SA, SLU, etc.)</li>
+                    <li>CNAE y objeto social</li>
+                    <li>Fecha de constitución</li>
+                    <li>Estado actual (activa, disuelta, concurso)</li>
+                    <li>Registro Mercantil de inscripción</li>
+                </ul>
             </div>
-            
-            <!-- Step 2 -->
-            <div class="text-center p-6">
-                <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 text-2xl font-bold mb-4 mx-auto">2</div>
-                <h3 class="text-xl font-bold mb-3 text-gray-900">Selecciona el informe</h3>
-                <p class="text-gray-600">
-                    Elige entre los diferentes tipos de informes disponibles según la información que necesites.
+
+            {{-- Administradores --}}
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Administradores y Cargos</h3>
+                <p>
+                    Identifica quién dirige realmente cada empresa. Histórico completo de nombramientos, ceses y poderes notariales.
                 </p>
+                <ul class="feature-list">
+                    <li>Administradores actuales y pasados</li>
+                    <li>Tipo de cargo (único, solidario, mancomunado)</li>
+                    <li>Fecha de nombramiento y cese</li>
+                    <li>Poderes y facultades</li>
+                    <li>Vinculaciones empresariales</li>
+                    <li>Historial de cargos en otras empresas</li>
+                    <li>Red de contactos empresariales</li>
+                </ul>
             </div>
-            
-            <!-- Step 3 -->
-            <div class="text-center p-6">
-                <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600 text-2xl font-bold mb-4 mx-auto">3</div>
-                <h3 class="text-xl font-bold mb-3 text-gray-900">Descarga o consulta</h3>
-                <p class="text-gray-600">
-                    Visualiza la información directamente en la plataforma o descarga el informe en PDF.
+
+            {{-- Finanzas --}}
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Cuentas Anuales y Finanzas</h3>
+                <p>
+                    Analiza la salud financiera real de cualquier empresa. Balances, resultados y evolución de los últimos 15 años.
                 </p>
+                <ul class="feature-list">
+                    <li>Cifra de negocios (facturación)</li>
+                    <li>Resultado del ejercicio (beneficios/pérdidas)</li>
+                    <li>Activo total y patrimonio neto</li>
+                    <li>Pasivo y nivel de endeudamiento</li>
+                    <li>Fondos propios</li>
+                    <li>Número de empleados</li>
+                    <li>Evolución financiera histórica</li>
+                    <li>Ratios financieros clave</li>
+                </ul>
+            </div>
+
+            {{-- Actos BORME --}}
+            <div class="feature-card">
+                <div class="feature-icon">📋</div>
+                <h3>Actos del BORME</h3>
+                <p>
+                    Todos los actos registrales publicados en el Boletín Oficial del Registro Mercantil desde 2009 hasta hoy.
+                </p>
+                <ul class="feature-list">
+                    <li>Constituciones de sociedades</li>
+                    <li>Nombramientos y ceses</li>
+                    <li>Ampliaciones de capital</li>
+                    <li>Reducciones de capital</li>
+                    <li>Fusiones y escisiones</li>
+                    <li>Disoluciones y liquidaciones</li>
+                    <li>Concursos de acreedores</li>
+                    <li>Cambios de domicilio social</li>
+                </ul>
+            </div>
+
+            {{-- Informes PDF --}}
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Informes Profesionales PDF</h3>
+                <p>
+                    Genera informes de due diligence en formato PDF en segundos. Listos para presentar a clientes, inversores o entidades financieras.
+                </p>
+                <ul class="feature-list">
+                    <li>Formato profesional y corporativo</li>
+                    <li>Descarga instantánea</li>
+                    <li>Datos verificados y actualizados</li>
+                    <li>Gráficos de evolución financiera</li>
+                    <li>Análisis de riesgo incluido</li>
+                    <li>Exportación ilimitada (Premium)</li>
+                </ul>
+            </div>
+
+            {{-- Alertas --}}
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <h3>Alertas Automáticas</h3>
+                <p>
+                    Monitoriza empresas clave y recibe notificaciones instantáneas cuando haya cambios críticos en el Registro Mercantil.
+                </p>
+                <ul class="feature-list">
+                    <li>Cambios de administradores</li>
+                    <li>Nuevas cuentas anuales depositadas</li>
+                    <li>Concursos de acreedores</li>
+                    <li>Ampliaciones/reducciones de capital</li>
+                    <li>Cambios de domicilio social</li>
+                    <li>Disoluciones y liquidaciones</li>
+                    <li>Notificaciones por email y SMS</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    {{-- STATS SECTION --}}
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div class="stat">
+                <h3>3.2M+</h3>
+                <p>Empresas en la Base de Datos</p>
+            </div>
+            <div class="stat">
+                <h3>15</h3>
+                <p>Años de Histórico del BORME</p>
+            </div>
+            <div class="stat">
+                <h3>50K+</h3>
+                <p>Profesionales Confían en Nosotros</p>
+            </div>
+            <div class="stat">
+                <h3>24h</h3>
+                <p>Actualización Diaria Garantizada</p>
             </div>
         </div>
     </div>
-</section>
 
-<!-- CTA Section -->
-<section class="py-20 bg-gradient-to-r from-indigo-600 to-purple-700 text-white">
-    <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-space-grotesk">¿Listo para empezar?</h2>
-        <p class="text-xl mb-8 max-w-2xl mx-auto">
-            Únete a miles de profesionales que ya utilizan EmpreciF para tomar decisiones empresariales informadas.
+    {{-- USE CASES --}}
+    <section>
+        <div class="section-header">
+            <h2>¿Para Qué Sirve Consultar Información Empresarial?</h2>
+            <p>
+                Profesionales de todos los sectores utilizan EmpreciF para tomar decisiones informadas y proteger sus intereses económicos.
+            </p>
+        </div>
+
+        <div class="use-cases-grid">
+            <div class="use-case">
+                <h3><span class="use-case-icon">💼</span> Empresas y Comerciales</h3>
+                <p>Verifica la solvencia de clientes y proveedores antes de cerrar operaciones comerciales importantes.</p>
+            </div>
+            <div class="use-case">
+                <h3><span class="use-case-icon">⚖️</span> Abogados y Asesores</h3>
+                <p>Accede a información oficial para due diligence, litigios y asesoramiento legal a clientes.</p>
+            </div>
+            <div class="use-case">
+                <h3><span class="use-case-icon">🏦</span> Entidades Financieras</h3>
+                <p>Evalúa el riesgo crediticio y la capacidad de pago de empresas solicitantes de financiación.</p>
+            </div>
+            <div class="use-case">
+                <h3><span class="use-case-icon">📊</span> Inversores y Fondos</h3>
+                <p>Investiga empresas objetivo antes de invertir. Analiza competidores y tendencias del mercado.</p>
+            </div>
+            <div class="use-case">
+                <h3><span class="use-case-icon">🔍</span> Detectives e Investigadores</h3>
+                <p>Obtén información oficial para investigaciones privadas, patrimoniales y corporativas.</p>
+            </div>
+            <div class="use-case">
+                <h3><span class="use-case-icon">📰</span> Periodistas y Medios</h3>
+                <p>Verifica datos empresariales para investigaciones periodísticas y reportajes económicos.</p>
+            </div>
+        </div>
+    </section>
+
+    {{-- SEO LONG CONTENT --}}
+    <section style="background: white; border-radius: 30px; padding: 5rem 4rem; margin: 6rem 2rem;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 3rem; font-weight: 900; margin-bottom: 2rem;">
+                ¿Por Qué Consultar Datos de Empresas en EmpreciF?
+            </h2>
+
+            <div style="color: #64748B; line-height: 1.9; font-size: 1.125rem;">
+                <p style="margin-bottom: 1.5rem;">
+                    <strong>EmpreciF es la plataforma líder en España</strong> para consultar información empresarial oficial del BORME (Boletín Oficial del Registro Mercantil). Con más de <strong>3.2 millones de empresas</strong> en nuestra base de datos, ofrecemos acceso instantáneo a datos verificados y actualizados diariamente desde 2009.
+                </p>
+
+                <h3 style="font-size: 2rem; font-weight: 800; margin: 3rem 0 1.5rem;">
+                    Información Empresarial Oficial y Verificada
+                </h3>
+                <p style="margin-bottom: 1.5rem;">
+                    Todos los datos que ofrecemos provienen directamente del <strong>Registro Mercantil</strong> y del <strong>BORME oficial</strong>, garantizando la máxima fiabilidad y validez legal. Nuestros datos se actualizan <strong>automáticamente cada 24 horas</strong>, asegurando que siempre tengas acceso a la información más reciente.
+                </p>
+
+                <h3 style="font-size: 2rem; font-weight: 800; margin: 3rem 0 1.5rem;">
+                    Consulta Empresas por NIF, CIF o Nombre
+                </h3>
+                <p style="margin-bottom: 1.5rem;">
+                    Nuestro potente motor de búsqueda te permite <strong>buscar cualquier empresa española</strong> por su NIF, CIF, razón social o incluso por el nombre de sus administradores.
+                </p>
+
+                <h3 style="font-size: 2rem; font-weight: 800; margin: 3rem 0 1.5rem;">
+                    Cuentas Anuales y Datos Financieros Completos
+                </h3>
+                <p style="margin-bottom: 1.5rem;">
+                    Accede a las <strong>cuentas anuales depositadas</strong> en el Registro Mercantil de los últimos 15 años. Analiza facturación, resultados, activos, pasivos y evolución histórica.
+                </p>
+
+                <h3 style="font-size: 2rem; font-weight: 800; margin: 3rem 0 1.5rem;">
+                    Administradores y Vinculaciones Empresariales
+                </h3>
+                <p style="margin-bottom: 1.5rem;">
+                    Descubre <strong>quién está detrás de cada empresa</strong> y sus vínculos con otras sociedades.
+                </p>
+
+                <h3 style="font-size: 2rem; font-weight: 800; margin: 3rem 0 1.5rem;">
+                    Actos del BORME en Tiempo Real
+                </h3>
+                <p style="margin-bottom: 1.5rem;">
+                    Mantente informado de todas las publicaciones relevantes: constituciones, nombramientos, ampliaciones de capital, concursos de acreedores, etc.
+                </p>
+
+                <h3 style="font-size: 2rem; font-weight: 800; margin: 3rem 0 1.5rem;">
+                    Alternativa Profesional a Infocif, Infoempresas y Axesor
+                </h3>
+                <p style="margin-bottom: 1.5rem;">
+                    EmpreciF es la <strong>alternativa moderna y económica</strong> a plataformas tradicionales, con interfaz intuitiva y precios competitivos.
+                </p>
+
+                <h3 style="font-size: 2rem; font-weight: 800; margin: 3rem 0 1.5rem;">
+                    Prueba Gratis Durante 14 Días
+                </h3>
+                <p style="margin-bottom: 1.5rem;">
+                    Empieza a consultar información empresarial <strong>sin tarjeta de crédito</strong>. Prueba todas las funcionalidades Premium durante 14 días completamente gratis.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    {{-- CTA FINAL --}}
+    <div class="cta-section">
+        <h2>Empieza a Consultar Empresas Gratis Hoy Mismo</h2>
+        <p>
+            Únete a más de 50.000 profesionales que ya utilizan EmpreciF para tomar decisiones informadas. Prueba completa durante 14 días sin tarjeta de crédito.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            @guest
-                <a href="{{ route('register') }}" class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
-                    Crear cuenta gratis
-                </a>
-                <a href="{{ route('pricing') }}" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-indigo-700 font-semibold py-3 px-8 rounded-full transition duration-300">
-                    Ver planes y precios
-                </a>
-            @else
-                <a href="{{ route('dashboard') }}" class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-semibold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
-                    Ir al panel de control
-                </a>
-            @endguest
+
+        <div class="cta-buttons">
+            <a href="{{ route('register') }}" class="btn btn-primary btn-large">🚀 Crear Cuenta Gratis</a>
+            <a href="{{ route('pricing') }}" class="btn btn-outline btn-large">Ver Planes y Precios</a>
         </div>
-        <p class="mt-4 text-indigo-100">
-            Sin compromiso. Sin tarjeta de crédito necesaria.
+
+        <p style="margin-top: 2rem; font-size: 1rem; opacity: 0.8;">
+            ✓ Sin permanencia • ✓ Cancela cuando quieras • ✓ Soporte 24/7 • ✓ Datos oficiales BORME
         </p>
     </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Lo que dicen nuestros clientes</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">Descubre la experiencia de quienes ya utilizan nuestra plataforma</p>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Testimonial 1 -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                    <div class="text-yellow-400 text-xl">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                <p class="text-gray-600 mb-4">"Increíble plataforma. Nos ha ayudado a verificar la solvencia de nuestros proveedores de manera rápida y confiable."</p>
-                <div class="flex items-center">
-                    <div class="bg-gray-200 w-10 h-10 rounded-full flex items-center justify-center text-gray-600 font-bold">JD</div>
-                    <div class="ml-3">
-                        <p class="font-semibold">Juan Díaz</p>
-                        <p class="text-sm text-gray-500">Director Financiero, Empresa XYZ</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Testimonial 2 -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                    <div class="text-yellow-400 text-xl">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                <p class="text-gray-600 mb-4">"La interfaz es muy intuitiva y los informes son detallados. Una herramienta esencial para nuestro departamento de riesgos."</p>
-                <div class="flex items-center">
-                    <div class="bg-gray-200 w-10 h-10 rounded-full flex items-center justify-center text-gray-600 font-bold">MP</div>
-                    <div class="ml-3">
-                        <p class="font-semibold">María Pérez</p>
-                        <p class="text-sm text-gray-500">Gerente de Riesgos, ABC Corp</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Testimonial 3 -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                    <div class="text-yellow-400 text-xl">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                    </div>
-                </div>
-                <p class="text-gray-600 mb-4">"Excelente servicio al cliente y actualizaciones constantes. Han mejorado significativamente nuestros procesos de debida diligencia."</p>
-                <div class="flex items-center">
-                    <div class="bg-gray-200 w-10 h-10 rounded-full flex items-center justify-center text-gray-600 font-bold">LG</div>
-                    <div class="ml-3">
-                        <p class="font-semibold">Laura Gómez</p>
-                        <p class="text-sm text-gray-500">Directora de Cumplimiento, 123 S.A.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 @endsection
