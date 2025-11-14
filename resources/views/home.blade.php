@@ -73,7 +73,8 @@
             </p>
 
             {{-- SEARCH BOX --}}
-            <form action="{{ route('search') }}" method="GET" class="search-box">
+        <form action="{{ route('company.search') }}" method="GET" class="search-box">
+
                 <input 
                     type="text"
                     name="q"

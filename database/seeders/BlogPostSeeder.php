@@ -52,14 +52,20 @@ class BlogPostSeeder extends Seeder
             ],
         ];
 
-        foreach ($posts as $post) {
-            // Asegurarse de que las etiquetas sean un array
-            if (isset($post['tags']) && is_string($post['tags'])) {
-                $post['tags'] = explode(',', $post['tags']);
-            }
-            
-            // Crear el post
-            BlogPost::create($post);
-        }
+      foreach ($posts as $post) {
+    // Asegurarse de que las etiquetas sean un array
+    if (isset($post['tags']) && is_string($post['tags'])) {
+        $post['tags'] = explode(',', $post['tags']);
+    }
+
+    // 🔥 Evitar error de slug duplicado sin modificar contenido existente
+    if (BlogPost::where('slug', $post['slug'])->exists()) {
+        continue; // NO creamos ni tocamos el post
+    }
+
+    // Crear el post normalmente
+    BlogPost::create($post);
+}
+
     }
 }

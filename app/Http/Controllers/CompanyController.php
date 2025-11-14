@@ -6,15 +6,13 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\JsonResponse;
 
 class CompanyController extends Controller
 {
     /**
-     * Muestra el formulario de búsqueda de empresas dentro del dashboard (usuarios autenticados).
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\View\View
+     * --------------------------------------------------------------
+     *  BÚSQUEDA DE EMPRESAS (Dashboard / Usuarios autenticados)
+     * --------------------------------------------------------------
      */
     public function search(Request $request)
     {
@@ -22,142 +20,115 @@ class CompanyController extends Controller
         $results = [];
 
         if ($query) {
-            // ⚠️ Por ahora, simulamos datos hasta conectar con la API real
-            $results = [
-                [
-                    'id' => 1,
-                    'nombre' => 'TECNOLOGÍA AVANZADA SL',
-                    'nif' => 'A12345678',
-                    'localidad' => 'Barcelona',
-                    'provincia' => 'Barcelona',
-                    'estado' => 'ACTIVA',
-                    'facturacion' => 2400000,
-                    'resultado_neto' => 347000,
-                    'empleados' => 24,
-                ],
-                [
-                    'id' => 2,
-                    'nombre' => 'INNOVACIÓN TECNOLÓGICA SA',
-                    'nif' => 'A98765432',
-                    'localidad' => 'Madrid',
-                    'provincia' => 'Madrid',
-                    'estado' => 'ACTIVA',
-                    'facturacion' => 5800000,
-                    'resultado_neto' => 892000,
-                    'empleados' => 47,
-                ],
-            ];
+            $results = Company::active()
+                ->where(function ($q) use ($query) {
+                    $q->where('name', 'like', "%$query%")
+                      ->orWhere('cif', 'like', "%$query%");
+                })
+                ->limit(20)
+                ->get();
         }
 
         return view('company.search', compact('results'));
     }
 
-    /**
-     * Vista pública de una empresa (accesible sin login).
-     */
-    public function showPublic($slug)
-    {
-        $company = Cache::remember("company.public.{$slug}", now()->addDay(), function () use ($slug) {
-            return Company::with(['favoritedBy' => function ($query) {
-                if (auth()->check()) {
-                    $query->where('user_id', auth()->id());
-                }
-            }])
-                ->active()
-                ->where('slug', $slug)
-                ->firstOrFail();
-        });
 
-        $hasPremiumAccess = false;
-        $isFavorite = false;
-
-        if (auth()->check()) {
-            $user = auth()->user();
-
-            // Usuarios en prueba: limitar accesos
-            if ($user->hasRole('usuario') && $user->isOnTrial()) {
-                $access = $user->canAccessCompany();
-
-                if (!$access['canAccess']) {
-                    return redirect()->route('dashboard')
-                        ->with('error', $access['message']);
-                }
-
-                $user->incrementCompanyViewCount();
-            }
-
-            $hasPremiumAccess = $user->isPremium() || $user->isAdmin();
-            $isFavorite = $company->isFavoritedBy($user);
-        }
-
-        return view('company.public', [
-            'company' => $company,
-            'hasPremiumAccess' => $hasPremiumAccess,
-            'isFavorite' => $isFavorite,
-        ]);
-    }
 
     /**
-     * Vista premium de una empresa (solo premium/admin).
+     * --------------------------------------------------------------
+     *  BUSCADOR AJAX (barra de búsqueda del dashboard)
+     * --------------------------------------------------------------
      */
-    public function showPremium($slug)
-    {
-        $company = Cache::remember("company.premium.{$slug}", now()->addHours(6), function () use ($slug) {
-            return Company::with(['favoritedBy' => function ($query) {
-                $query->where('user_id', auth()->id());
-            }])
-                ->active()
-                ->where('slug', $slug)
-                ->firstOrFail();
-        });
-
-        if (!auth()->user()->isPremium() && !auth()->user()->isAdmin()) {
-            return redirect()->route('pricing')
-                ->with('message', 'Necesitas una suscripción premium para acceder a esta información.');
-        }
-
-        return view('company.premium', [
-            'company' => $company,
-            'isFavorite' => $company->isFavoritedBy(auth()->user()),
-        ]);
-    }
-
-    /**
-     * Búsqueda AJAX (para autocompletado o resultados dinámicos).
-     */
-    public function searchAjax(Request $request): JsonResponse
+    public function searchAjax(Request $request)
     {
         $request->validate([
             'query' => 'required|string|min:2|max:255',
         ]);
 
-        $companies = Company::search($request->query('query'))
-            ->active()
+        $companies = Company::active()
+            ->search($request->query('query'))
             ->limit(10)
-            ->get(['id', 'name', 'cif', 'sector', 'city', 'province']);
+            ->get(['id', 'slug', 'name', 'cif', 'city', 'province']);
 
         return response()->json($companies);
     }
 
+
+
     /**
-     * Endpoint API para obtener información de empresa (futuro uso en frontend).
+     * --------------------------------------------------------------
+     *  SHOW UNIFICADO (público + autenticados + premium)
+     * --------------------------------------------------------------
      */
-    public function apiShow($id): JsonResponse
+    public function show($slug)
     {
-        $company = Company::findOrFail($id);
+        $user = Auth::user();
 
-        $data = [
-            'id' => $company->id,
-            'name' => $company->name,
-            'cif' => $company->cif,
-            'sector' => $company->sector,
-            'website' => $company->website,
-            'employees' => $company->employees,
-            'revenue' => $company->formatted_revenue,
-            'profit' => $company->formatted_profit,
-            'is_premium' => $company->is_premium,
-        ];
+        /** ---------------------------------------------------------
+         * 1) Cargar empresa con relaciones necesarias
+         * --------------------------------------------------------- */
+        $company = Cache::remember(
+            "company.full.{$slug}",
+            now()->addMinutes(20),
+            fn () => Company::with([
+                'directors',
+                'shareholdersRelation',
+                'events',
+                'accounts',
+                'favoritedBy'
+            ])
+            ->active()
+            ->where('slug', $slug)
+            ->firstOrFail()
+        );
 
-        return response()->json($data);
+        /** ---------------------------------------------------------
+         * 2) Determinar nivel de acceso según rol
+         * --------------------------------------------------------- */
+        $isGuest           = !$user;
+        $isPremiumOrAdmin  = $user && ($user->isPremium() || $user->isAdmin());
+        $isTrial           = $user && $user->isOnTrial();
+        $isFree            = $user && $user->isFree();
+
+
+
+        /** ---------------------------------------------------------
+         * 3) Control para usuarios Trial → máx 2 empresas
+         * --------------------------------------------------------- */
+        if ($user && $user->hasRole('usuario') && $isTrial) {
+            
+            $access = $user->canAccessCompany();
+
+            if (!$access['canAccess']) {
+                return redirect()->route('pricing')
+                    ->with('error', $access['message']);
+            }
+
+            $user->incrementCompanyViewCount();
+        }
+
+
+
+        /** ---------------------------------------------------------
+         * 4) Preparar variables para la vista unificada
+         * --------------------------------------------------------- */
+        return view('company.show', [
+            'company'           => $company,
+
+            // Roles
+            'isGuest'           => $isGuest,
+            'isPremiumOrAdmin'  => $isPremiumOrAdmin,
+            'isTrial'           => $isTrial,
+            'isFree'            => $isFree,
+
+            // Favoritos
+            'isFavorite'        => $user ? $company->isFavoritedBy($user) : false,
+
+            // Datos que la vista filtrará por rol
+            'directors'         => $company->directors,
+            'shareholders'      => $company->shareholdersRelation,
+            'events'            => $company->events()->orderBy('fecha', 'desc')->get(),
+            'accounts'          => $company->accounts()->orderBy('ejercicio', 'desc')->get(),
+        ]);
     }
 }

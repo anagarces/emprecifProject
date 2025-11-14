@@ -3,18 +3,18 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Plan;
-use App\Models\Subscription;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use Carbon\Carbon;
+use Laravel\Cashier\Subscription;
 
 class TestUsersSeeder extends Seeder
 {
     public function run()
     {
-        // Crear roles si no existen
+        // ================================
+        // ROLES (Crear si no existen)
+        // ================================
         $adminRole   = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
         $premiumRole = Role::firstOrCreate(['name' => 'premium', 'guard_name' => 'web']);
         $userRole    = Role::firstOrCreate(['name' => 'usuario', 'guard_name' => 'web']);
@@ -34,7 +34,7 @@ class TestUsersSeeder extends Seeder
         $admin->syncRoles([$adminRole]);
 
         // ================================
-        // PREMIUM
+        // PREMIUM (con suscripción simulada)
         // ================================
         $premium = User::updateOrCreate(
             ['email' => 'premium@emprecif.com'],
@@ -47,18 +47,24 @@ class TestUsersSeeder extends Seeder
         );
         $premium->syncRoles([$premiumRole]);
 
-        // Crear suscripción activa para el usuario Premium
-        $premiumPlan = Plan::where('name', 'Premium')->first();
-
-        if ($premiumPlan) {
-            Subscription::updateOrCreate(
-                ['user_id' => $premium->id, 'plan_id' => $premiumPlan->id],
-                [
-                    'starts_at' => now(),
-                    'ends_at' => Carbon::now()->addMonth(), // activa por 1 mes
-                ]
-            );
-        }
+        // Suscripción activa simulada compatible con Cashier
+        \DB::table('subscriptions')->updateOrInsert(
+            [
+                'user_id' => $premium->id,
+                'name' => 'default', // Cashier lo usa SIEMPRE
+            ],
+            [
+                'subscription_type' => 'fake', // ← tu columna renombrada
+                'stripe_id' => 'sub_fake_123',
+                'stripe_status' => 'active',
+                'stripe_price' => 'price_fake_123',
+                'quantity' => 1,
+                'trial_ends_at' => null,
+                'ends_at' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
 
         // ================================
         // USUARIO BÁSICO (Trial)
@@ -69,7 +75,7 @@ class TestUsersSeeder extends Seeder
                 'name' => 'Usuario Básico',
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
-                'trial_ends_at' => now()->addDays(15), // 15 días de prueba
+                'trial_ends_at' => now()->addDays(15),
             ]
         );
         $user->syncRoles([$userRole]);

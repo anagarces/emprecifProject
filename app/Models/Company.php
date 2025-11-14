@@ -148,4 +148,37 @@ class Company extends Model
     {
         return $this->profit ? number_format($this->profit, 2, ',', '.') . ' €' : 'N/A';
     }
+
+        /**
+     * Administradores (tabla relacional).
+     */
+    public function directors()
+    {
+        return $this->hasMany(CompanyDirector::class);
+    }
+
+    /**
+     * Socios / accionistas.
+     */
+    public function shareholdersRelation()
+    {
+        return $this->hasMany(CompanyShareholder::class);
+    }
+
+    /**
+     * Actos BORME / registrales.
+     */
+    public function events()
+    {
+        return $this->hasMany(CompanyEvent::class);
+    }
+
+    /**
+     * Cuentas anuales.
+     */
+    public function accounts()
+    {
+        return $this->hasMany(CompanyAccount::class);
+    }
+
 }

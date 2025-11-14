@@ -19,6 +19,9 @@ public function run(): void
         RolesAndPermissionsSeeder::class,
         TestUsersSeeder::class,
         BlogPostSeeder::class,
+        CompanySeeder::class,
+        CompanyFullSeeder::class,
+
     ]);
 
     // Create test users if not in production

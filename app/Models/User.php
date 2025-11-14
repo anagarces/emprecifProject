@@ -140,21 +140,11 @@ class User extends Authenticatable
     /**
      * Determina si el usuario tiene acceso premium.
      */
-    public function isPremium(): bool
-        {
-     // Admin siempre tiene acceso premium
-    if ($this->isAdmin()) {
-            return true;
-    }
-
-    // Rol premium explícito
-    if ($this->hasRole('premium')) {
-            return true;
-    }
-
-    // NO consideramos trial como premium
-    return false;
+public function isPremium(): bool
+{
+    return $this->hasRole('admin') || $this->hasRole('premium');
 }
+
 
 
 
@@ -174,4 +164,13 @@ class User extends Authenticatable
     return true;
 }
 
+/**
+ * Determina si el usuario puede ver datos premium de empresas.
+ */
+public function canSeePremiumData(): bool
+{
+    return $this->hasRole('admin') || $this->hasRole('premium');
+}
+
+ 
 }

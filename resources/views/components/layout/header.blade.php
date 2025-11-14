@@ -25,7 +25,7 @@
         </a>
         <ul class="nav-menu">
             <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Inicio</a></li>
-            <li><a href="{{ route('search') }}" class="{{ request()->routeIs('search*') ? 'active' : '' }}">Buscar Empresas</a></li>
+            <li><a href="{{ route('company.search') }}" class="{{ request()->routeIs('company.search') ? 'active' : '' }}">Buscar Empresas</a></li>
             <li><a href="{{ route('pricing') }}" class="{{ request()->routeIs('pricing') ? 'active' : '' }}">Precios</a></li>
             <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">Nosotros</a></li>
             <li><a href="{{ route('blog.index') }}" class="{{ request()->routeIs('blog*') ? 'active' : '' }}">Blog</a></li>

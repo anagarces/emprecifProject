@@ -1,0 +1,184 @@
+/* ================================
+   TIPOGRAFÍA Y VARIABLES
+=================================*/
+:root {
+    --primary: #3b82f6;
+    --accent: #10b981;
+    --dark: #1e293b;
+    --gray: #64748b;
+    --light: #f1f5f9;
+    --radius: 16px;
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+}
+
+.label {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-bottom: 0.4rem;
+}
+
+.value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+/* ================================
+   TABLAS
+=================================*/
+.table-header {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 700;
+    color: var(--dark);
+    font-size: 0.95rem;
+}
+
+.table-row {
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.table-cell {
+    padding: 1rem;
+    font-size: 1rem;
+    color: var(--dark);
+}
+
+/* ================================
+   TARJETAS / BOXES
+=================================*/
+.box {
+    background: white;
+    padding: 3rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 3rem;
+}
+
+.box-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+/* ================================
+   BOTONES
+=================================*/
+.btn-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--primary);
+    color: white;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background: #2563eb;
+}
+
+.btn-outline {
+    display: inline-block;
+    padding: 1rem 2rem;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.btn-outline:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* ================================
+   PREMIUM OVERLAY (Locked Content)
+=================================*/
+.premium-overlay-container {
+    position: relative;
+}
+
+.premium-blurred {
+    filter: blur(5px);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.premium-overlay-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    text-align: center;
+    border: 3px solid var(--primary);
+}
+
+/* ================================
+   ESTILOS PARA ACTOS BORME
+=================================*/
+.borme-item {
+    padding: 1.5rem;
+    background: var(--light);
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+}
+
+.borme-date {
+    font-size: 0.875rem;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+}
+
+.borme-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+/* ================================
+   RESPONSIVE
+=================================*/
+@media (max-width: 992px) {
+    .value {
+        font-size: 1.1rem;
+    }
+
+    .box {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .box-title {
+        font-size: 1.8rem;
+    }
+
+    .premium-overlay-box {
+        padding: 2rem;
+    }
+
+    .table-cell,
+    .table-header {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .value {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .box {
+        padding: 1.5rem;
+    }
+}
