@@ -10,7 +10,8 @@ use App\Http\Controllers\{
     BlogPostController,
     NewsletterController,
     SettingsController,
-    ReportController
+    ReportController,
+    FavoriteController
 };
 use App\Models\BlogPost;
 
@@ -22,17 +23,16 @@ use App\Models\BlogPost;
 */
 
 Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/buscar', function () {
-    return redirect()->route('company.search');
-})->name('search');
 
-
+// Redirección desde /buscar al buscador de empresas
+Route::get('/buscar', fn() => redirect()->route('company.search'))
+    ->name('search');
 
 // Información de marketing
 Route::get('/precios', [PageController::class, 'pricing'])->name('pricing');
 Route::get('/caracteristicas', [PageController::class, 'features'])->name('features');
 Route::get('/sobre-nosotros', [PageController::class, 'about'])->name('about');
-Route::get('/equipo', [PageController::class, 'about']); // Redirige a "sobre-nosotros"
+Route::get('/equipo', [PageController::class, 'about']); // Alias
 
 // Contacto
 Route::get('/contacto', [PageController::class, 'contact'])->name('contact');
@@ -54,6 +54,33 @@ Route::prefix('legal')->name('legal.')->group(function () {
     Route::get('/terminos-condiciones', [PageController::class, 'terms'])->name('terms');
 });
 
+
+/*
+|--------------------------------------------------------------------------
+| RUTAS PÚBLICAS DE EMPRESAS (VISITANTES + LOGUEADOS)
+|--------------------------------------------------------------------------
+| Aquí NO hay middleware de auth. Cualquiera puede:
+|  - Buscar empresas
+|  - Ver el perfil público de una empresa
+| Las restricciones por rol se aplican en la vista privada /detalle.
+*/
+
+Route::prefix('empresas')->name('company.')->group(function () {
+
+    // Buscador público (usado también desde el dashboard)
+    Route::get('/buscar', [CompanyController::class, 'search'])
+        ->name('search');
+
+    // Resultados AJAX públicos
+    Route::get('/buscar/resultados', [CompanyController::class, 'searchAjax'])
+        ->name('search.ajax');
+
+    // Perfil público de empresa (sin datos premium)
+    Route::get('/{company:slug}', [CompanyController::class, 'showPublic'])
+        ->name('show.public');
+});
+
+
 /*
 |--------------------------------------------------------------------------
 | AUTENTICACIÓN
@@ -64,12 +91,14 @@ require __DIR__.'/auth.php';
 // Login con redes sociales
 Route::get('login/{provider}', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'redirectToProvider'])
     ->name('login.provider');
+
 Route::get('login/{provider}/callback', [\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'handleProviderCallback'])
     ->name('login.provider.callback');
 
+
 /*
 |--------------------------------------------------------------------------
-| RUTAS PROTEGIDAS
+| RUTAS PROTEGIDAS (requiere login + verificación + subscription)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'verified', 'subscription'])->group(function () {
@@ -99,17 +128,23 @@ Route::middleware(['auth', 'verified', 'subscription'])->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | RUTAS CON RESTRICCIÓN DE TRIAL (FREE + TRIAL + PREMIUM)
+    | EMPRESAS (rutas privadas: detalle y favoritos)
     |--------------------------------------------------------------------------
+    | OJO: aquí YA NO definimos /empresas/buscar.
+    | Solo cosas que requieren estar logueado.
     */
+
     Route::middleware(['trial.access'])->group(function () {
 
-        // Búsqueda y visualización de empresas
         Route::prefix('empresas')->name('company.')->group(function () {
-            Route::get('/buscar', [CompanyController::class, 'search'])->name('search');
-            Route::get('/buscar/resultados', [CompanyController::class, 'searchAjax'])->name('search.ajax');
-            Route::get('/{company:slug}', [CompanyController::class, 'show'])->name('show'); // ← mostrar empresa
-            Route::post('/{company:slug}/favorito', [FavoriteController::class, 'toggle'])->name('favorite'); //agregar / quitar de favoritos
+
+            // Perfil privado con datos extendidos (free/trial/premium/admin)
+            Route::get('/{company:slug}/detalle', [CompanyController::class, 'show'])
+                ->name('show');
+
+            // Favoritos (toggle)
+            Route::post('/{company:slug}/favorito', [FavoriteController::class, 'toggle'])
+                ->name('favorite');
         });
 
         // Informes
@@ -118,19 +153,12 @@ Route::middleware(['auth', 'verified', 'subscription'])->group(function () {
             Route::get('/empresa/{company:slug}', [ReportController::class, 'show'])->name('show');
             Route::get('/descargar/{company:slug}', [ReportController::class, 'download'])->name('download');
         });
-
     });
 
     // Configuración
     Route::get('/configuracion', [SettingsController::class, 'index'])->name('settings');
 
-    // PREMIUM
-   /* Route::middleware(['premium'])->group(function () {
-        Route::get('/empresa/{company:slug}/premium', [CompanyController::class, 'showPremium'])
-            ->name('company.premium');
-    });*/
-
-    // Panel admin blog
+    // Panel admin (blog)
     Route::middleware(['role:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::resource('blog', \App\Http\Controllers\Admin\BlogPostController::class)
             ->except(['show'])
@@ -139,6 +167,7 @@ Route::middleware(['auth', 'verified', 'subscription'])->group(function () {
             ->name('blog.show');
     });
 });
+
 
 /*
 |--------------------------------------------------------------------------
