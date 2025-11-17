@@ -22,7 +22,7 @@ class CompanyController extends Controller
         if ($query) {
             $results = Company::active()
                 ->where(function ($q) use ($query) {
-                    $q->where('name', 'like', "%$query%")
+                    $q->where('name', 'ilike', "%$query%")
                       ->orWhere('cif', 'like', "%$query%");
                 })
                 ->limit(20)
