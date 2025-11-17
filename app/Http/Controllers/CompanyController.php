@@ -11,25 +11,28 @@ class CompanyController extends Controller
 {
     /**
      * --------------------------------------------------------------
-     *  BÚSQUEDA DE EMPRESAS (Dashboard / Usuarios autenticados)
+     *  BÚSQUEDA DE EMPRESAS (Dentro del Dashboard / Usuarios autenticados)
      * --------------------------------------------------------------
      */
+    
     public function search(Request $request)
     {
         $query = trim($request->input('q', ''));
-        $results = [];
+        $results = collect();
 
-        if ($query) {
-            $results = Company::active()
-                ->where(function ($q) use ($query) {
-                    $q->where('name', 'ilike', "%$query%")
-                      ->orWhere('cif', 'like', "%$query%");
-                })
+        if ($query !== '') {
+            $results = Company::with(['accounts' => function ($q) {
+                    $q->orderBy('ejercicio', 'desc');
+                }])
+                ->active()
+                ->search($query)
                 ->limit(20)
                 ->get();
         }
 
-        return view('company.search', compact('results'));
+        return view('company.search', [
+            'results' => $results,
+        ]);
     }
 
 
@@ -39,7 +42,7 @@ class CompanyController extends Controller
      *  BUSCADOR AJAX (barra de búsqueda del dashboard)
      * --------------------------------------------------------------
      */
-    public function searchAjax(Request $request)
+     public function searchAjax(Request $request)
     {
         $request->validate([
             'query' => 'required|string|min:2|max:255',
@@ -60,43 +63,35 @@ class CompanyController extends Controller
      *  SHOW UNIFICADO (público + autenticados + premium)
      * --------------------------------------------------------------
      */
-    public function show($slug)
+     public function show(Company $company)
     {
         $user = Auth::user();
 
-        /** ---------------------------------------------------------
-         * 1) Cargar empresa con relaciones necesarias
-         * --------------------------------------------------------- */
+        // Recargar con relaciones y cachear
         $company = Cache::remember(
-            "company.full.{$slug}",
+            "company.full.{$company->slug}",
             now()->addMinutes(20),
-            fn () => Company::with([
-                'directors',
-                'shareholdersRelation',
-                'events',
-                'accounts',
-                'favoritedBy'
-            ])
-            ->active()
-            ->where('slug', $slug)
-            ->firstOrFail()
+            function () use ($company) {
+                return Company::with([
+                        'directors',
+                        'shareholdersRelation',
+                        'events',
+                        'accounts',
+                    ])
+                    ->active()
+                    ->where('id', $company->id)
+                    ->firstOrFail();
+            }
         );
 
-        /** ---------------------------------------------------------
-         * 2) Determinar nivel de acceso según rol
-         * --------------------------------------------------------- */
-        $isGuest           = !$user;
-        $isPremiumOrAdmin  = $user && ($user->isPremium() || $user->isAdmin());
-        $isTrial           = $user && $user->isOnTrial();
-        $isFree            = $user && $user->isFree();
+        // ---- Roles / estado de usuario ----
+        $isGuest          = !$user;
+        $isPremiumOrAdmin = $user && ($user->isPremium() || $user->isAdmin());
+        $isTrial          = $user && $user->isOnTrial();
+        $isFree           = $user && $user->isFree();
 
-
-
-        /** ---------------------------------------------------------
-         * 3) Control para usuarios Trial → máx 2 empresas
-         * --------------------------------------------------------- */
+        // ---- Límite de trial: máximo 2 empresas ----
         if ($user && $user->hasRole('usuario') && $isTrial) {
-            
             $access = $user->canAccessCompany();
 
             if (!$access['canAccess']) {
@@ -107,28 +102,30 @@ class CompanyController extends Controller
             $user->incrementCompanyViewCount();
         }
 
+        // ---- Permisos de datos por rol ----
+        $canSeePublic  = true;              // cualquier usuario autenticado
+        $canSeePremium = $isPremiumOrAdmin; // solo premium / admin
 
-
-        /** ---------------------------------------------------------
-         * 4) Preparar variables para la vista unificada
-         * --------------------------------------------------------- */
         return view('company.show', [
-            'company'           => $company,
+            'company'          => $company,
 
-            // Roles
-            'isGuest'           => $isGuest,
-            'isPremiumOrAdmin'  => $isPremiumOrAdmin,
-            'isTrial'           => $isTrial,
-            'isFree'            => $isFree,
+            // Info de rol
+            'isGuest'          => $isGuest,
+            'isPremiumOrAdmin' => $isPremiumOrAdmin,
+            'isTrial'          => $isTrial,
+            'isFree'           => $isFree,
+            'canSeePublic'     => $canSeePublic,
+            'canSeePremium'    => $canSeePremium,
 
-            // Favoritos
-            'isFavorite'        => $user ? $company->isFavoritedBy($user) : false,
+            // Favoritos (lo dejaremos inactivo de momento)
+            'isFavorite'       => false,
 
-            // Datos que la vista filtrará por rol
-            'directors'         => $company->directors,
-            'shareholders'      => $company->shareholdersRelation,
-            'events'            => $company->events()->orderBy('fecha', 'desc')->get(),
-            'accounts'          => $company->accounts()->orderBy('ejercicio', 'desc')->get(),
+            // Relaciones
+            'directors'        => $company->directors,
+            'shareholders'     => $company->shareholdersRelation,
+            'events'           => $company->events()->orderBy('fecha', 'desc')->get(),
+            'accounts'         => $company->accounts()->orderBy('ejercicio', 'desc')->get(),
         ]);
     }
 }
+

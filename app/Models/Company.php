@@ -109,12 +109,20 @@ class Company extends Model
     /**
      * Scope a query to search companies by name or CIF.
      */
+       /**
+     * Scope de búsqueda por nombre / CIF / razón social (case-insensitive).
+     */
     public function scopeSearch($query, string $search)
     {
-        return $query->where('name', 'ilike', "%{$search}%")
-                    ->orWhere('cif', 'ilike', "%{$search}%")
-                    ->orWhere('legal_name', 'like', "%{$search}%");
+        $search = mb_strtolower($search);
+
+        return $query->where(function ($q) use ($search) {
+            $q->whereRaw('LOWER(name) LIKE ?', ["%{$search}%"])
+              ->orWhereRaw('LOWER(cif) LIKE ?', ["%{$search}%"])
+              ->orWhereRaw('LOWER(legal_name) LIKE ?', ["%{$search}%"]);
+        });
     }
+
 
     /**
      * Get the users who have favorited this company.
