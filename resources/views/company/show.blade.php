@@ -64,7 +64,7 @@
 @if($canSeePremium)
     @include('company.partials.premium_data')
 @else
-    @include('company.partials.premium-locked')
+    @include('company.partials.premium_locked')
 @endif
 
 {{-- ================================

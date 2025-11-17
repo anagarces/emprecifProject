@@ -75,8 +75,12 @@
             <input id="terms" name="terms" type="checkbox" required
                    class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
             <label for="terms" class="ml-2 block text-sm text-gray-700">
-                {{ __('Acepto los') }} <a href="{{ route('terms') }}" class="text-primary-600 hover:text-primary-500">{{ __('Términos y Condiciones') }}</a>
-                {{ __('y la') }} <a href="{{ route('privacy') }}" class="text-primary-600 hover:text-primary-500">{{ __('Política de Privacidad') }}</a>
+                {{ __('Acepto los') }} <a href="{{ route('legal.terms') }}" class="text-primary-600 hover:text-primary-500">
+    {{ __('Términos y Condiciones') }}
+</a>
+
+                {{ __('y la') }} <a href="{{ route('legal.privacy') }}">
+{{ __('Política de Privacidad') }}</a>
             </label>
         </div>
 
