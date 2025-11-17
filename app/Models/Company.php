@@ -111,8 +111,8 @@ class Company extends Model
      */
     public function scopeSearch($query, string $search)
     {
-        return $query->where('name', 'like', "%{$search}%")
-                    ->orWhere('cif', 'like', "%{$search}%")
+        return $query->where('name', 'ilike', "%{$search}%")
+                    ->orWhere('cif', 'ilike', "%{$search}%")
                     ->orWhere('legal_name', 'like', "%{$search}%");
     }
 
