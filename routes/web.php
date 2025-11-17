@@ -24,7 +24,8 @@ use App\Models\BlogPost;
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/buscar', function () {
     return redirect()->route('company.search');
-});
+})->name('search');
+
 
 
 // Información de marketing
@@ -107,7 +108,8 @@ Route::middleware(['auth', 'verified', 'subscription'])->group(function () {
         Route::prefix('empresas')->name('company.')->group(function () {
             Route::get('/buscar', [CompanyController::class, 'search'])->name('search');
             Route::get('/buscar/resultados', [CompanyController::class, 'searchAjax'])->name('search.ajax');
-            Route::get('/{company:slug}', [CompanyController::class, 'show'])->name('show'); // ← unificado
+            Route::get('/{company:slug}', [CompanyController::class, 'show'])->name('show'); // ← mostrar empresa
+            Route::post('/{company:slug}/favorito', [FavoriteController::class, 'toggle'])->name('favorite'); //agregar / quitar de favoritos
         });
 
         // Informes

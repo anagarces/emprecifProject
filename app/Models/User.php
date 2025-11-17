@@ -172,5 +172,17 @@ public function canSeePremiumData(): bool
     return $this->hasRole('admin') || $this->hasRole('premium');
 }
 
+
+//empresas favoritas
+public function favorites()
+{
+    return $this->belongsToMany(Company::class, 'favorites')->withTimestamps();
+}
+
+public function hasFavorited(Company $company): bool
+{
+    return $this->favorites()->where('company_id', $company->id)->exists();
+}
+
  
 }
